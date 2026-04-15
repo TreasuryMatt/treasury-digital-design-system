@@ -12,7 +12,57 @@ Before making any changes to the application, ask the engineer:
 
 ---
 
-Wait for a numbered response before proceeding. Then use the files in this directory to guide your implementation:
+Wait for a numbered response, then ask the following five questions **one at a time**. Wait for each answer before asking the next.
+
+---
+
+**Question 2 — Who uses this app?**
+- A) Internal Treasury staff only
+- B) Mixed internal and external users
+- C) External or public users
+
+*(Affects how strictly to apply the .gov banner, auth patterns, and formal tone.)*
+
+---
+
+**Question 3 — What is the app's primary job?**
+- A) Data entry and forms
+- B) Viewing dashboards and reports
+- C) Managing records and tables
+- D) Workflow and approvals
+- E) Something else — describe it
+
+*(Helps prioritize which TDDS patterns to focus on.)*
+
+---
+
+**Question 4 — Does it have a login or authentication screen?**
+- A) Yes
+- B) No
+- C) It will need one
+
+*(The .gov banner and login card are required on all auth screens.)*
+
+---
+
+**Question 5 — Are there any pages or sections that should NOT be changed?**
+
+Free response. If none, say "none."
+
+*(Prevents changes to embedded third-party tools, charts, maps, or sensitive areas.)*
+
+---
+
+**Question 6 — Roughly how many pages or distinct views does the app have?**
+- A) 1–5
+- B) 6–15
+- C) 16 or more
+
+*(Helps determine whether to work page-by-page or propose a global approach first.)*
+
+---
+
+Once all six questions are answered, summarize the engineer's choices and confirm before making any changes. Then use the files in this directory to guide your implementation:
 
 - `TDDS.md` — Design system documentation and usage guidelines
 - `tdds.css` — Core TDDS stylesheet

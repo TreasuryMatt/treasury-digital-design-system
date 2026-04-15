@@ -9,7 +9,24 @@
 > 2. **Layout + cosmetics** — Restyle the app *and* reorganize page structure. May introduce sidebars, data tables, cards, or reordered sections. Requires some component-level changes.
 > 3. **Full conversion** — Rebuild to the TDDS standard look and feel. Best for internal tools that should feel consistent with other Treasury applications. May involve rewriting pages, splitting or merging sections, and reorganizing navigation.
 >
-> Wait for a numbered response before proceeding.
+> Wait for a numbered response, then ask the following five questions **one at a time**:
+>
+> **Q2 — Who uses this app?**
+> A) Internal Treasury staff only · B) Mixed internal and external · C) External/public users
+>
+> **Q3 — What is the app's primary job?**
+> A) Data entry & forms · B) Dashboards & reports · C) Records & tables · D) Workflow & approvals · E) Other — describe it
+>
+> **Q4 — Does it have a login or authentication screen?**
+> A) Yes · B) No · C) It will need one
+>
+> **Q5 — Are there any pages or sections that should NOT be changed?**
+> Free response. If none, say "none."
+>
+> **Q6 — Roughly how many pages or distinct views does the app have?**
+> A) 1–5 · B) 6–15 · C) 16 or more
+>
+> Once all questions are answered, summarize the choices and confirm before making any changes.
 
 The U.S. Department of the Treasury is rapidly building and deploying internal web applications. To ensure every application looks and behaves consistently — and meets federal standards — TDDS provides a shared design foundation derived from production Treasury apps.
 
