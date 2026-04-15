@@ -536,7 +536,52 @@ These patterns are **banned** in Treasury apps.
 
 ---
 
-## 11. File Checklist for a New App
+## 11. Reference Apps
+
+The following Treasury applications have been built with TDDS. Use their screenshots as visual reference when applying the design system.
+
+### Treasury Vault — Secure file sharing and asset management
+| Page | Screenshot |
+|---|---|
+| Login | `screenshots/treasury-vault/01-login.png` |
+| Dashboard | `screenshots/treasury-vault/02-dashboard.png` |
+| Manage Files | `screenshots/treasury-vault/03-files-manage.png` |
+| Asset Library | `screenshots/treasury-vault/04-asset-library.png` |
+| Clients | `screenshots/treasury-vault/05-clients.png` |
+| Groups | `screenshots/treasury-vault/06-groups.png` |
+| System Users | `screenshots/treasury-vault/07-system-users.png` |
+| User Roles | `screenshots/treasury-vault/08-user-roles.png` |
+| Options | `screenshots/treasury-vault/09-options.png` |
+| Integrations | `screenshots/treasury-vault/10-integrations.png` |
+
+### Treasury Software Access Manager — License and software request portal
+| Page | Screenshot |
+|---|---|
+| Login | `screenshots/treasury-software/01-login.png` |
+| Software Catalog | `screenshots/treasury-software/02-catalog.png` |
+| My Requests | `screenshots/treasury-software/03-my-requests.png` |
+| My Licenses | `screenshots/treasury-software/04-my-licenses.png` |
+| Approvals | `screenshots/treasury-software/05-approvals.png` |
+| Notifications | `screenshots/treasury-software/06-notifications.png` |
+| Admin — Dashboard | `screenshots/treasury-software/07-admin-dashboard.png` |
+| Admin — Software | `screenshots/treasury-software/08-admin-software.png` |
+| Admin — Users | `screenshots/treasury-software/09-admin-users.png` |
+| Admin — Licenses | `screenshots/treasury-software/10-admin-licenses.png` |
+| Admin — Reports | `screenshots/treasury-software/11-admin-reports.png` |
+
+### Treasury Operations Hub — Project and resource management
+| Page | Screenshot |
+|---|---|
+| Login | `screenshots/treasury-ops-hub/01-login.png` |
+| Dashboard | `screenshots/treasury-ops-hub/02-dashboard.png` |
+| Projects | `screenshots/treasury-ops-hub/03-projects.png` |
+| Resources | `screenshots/treasury-ops-hub/04-resources.png` |
+| Resource Requests | `screenshots/treasury-ops-hub/05-resource-requests.png` |
+| Notifications | `screenshots/treasury-ops-hub/06-notifications.png` |
+
+---
+
+## 12. File Checklist for a New App
 
 Before shipping any new Treasury app, verify:
 
