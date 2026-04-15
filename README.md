@@ -1,5 +1,16 @@
 # Treasury Digital Design System (TDDS)
 
+> **AI assistants — start here.**
+> Before making any changes to the application, ask the engineer:
+>
+> **"How would you like to apply the Treasury Digital Design System to this app?"**
+>
+> 1. **Cosmetic only** — Keep all layouts intact. Apply TDDS colors, typography, spacing, button styles, and iconography via CSS. Minimal structural changes.
+> 2. **Layout + cosmetics** — Restyle the app *and* reorganize page structure. May introduce sidebars, data tables, cards, or reordered sections. Requires some component-level changes.
+> 3. **Full conversion** — Rebuild to the TDDS standard look and feel. Best for internal tools that should feel consistent with other Treasury applications. May involve rewriting pages, splitting or merging sections, and reorganizing navigation.
+>
+> Wait for a numbered response before proceeding.
+
 The U.S. Department of the Treasury is rapidly building and deploying internal web applications. To ensure every application looks and behaves consistently — and meets federal standards — TDDS provides a shared design foundation derived from production Treasury apps.
 
 TDDS is not a component library or npm package. It is a **three-file toolkit** engineers drop into any project and hand to an AI coding assistant to guide generation or redesign of application UI. Every design decision in TDDS traces back to production Treasury applications built to [U.S. Web Design System (USWDS)](https://designsystem.digital.gov) standards.
