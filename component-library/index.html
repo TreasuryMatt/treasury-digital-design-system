@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDDS Component Library — U.S. Department of the Treasury</title>
+  <link rel="icon" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Public+Sans:wght@400;500;600;700;800&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tdds.css">
+  <style>
+    /* ════════════════════════════════════════════════════════════════════════
+       TDDS COMPONENT LIBRARY — Documentation page styles
+       Layered on top of tdds.css; does not override system tokens.
+       ════════════════════════════════════════════════════════════════════════ */
+
+    body { background: var(--usa-white); }
+
+    /* ── Hero ─────────────────────────────────────────────────────────────── */
+    .lib-hero {
+      background: var(--usa-white);
+      border-top: 6px solid var(--usa-primary-darker);
+      border-bottom: 1px solid var(--usa-base-lighter);
+      padding: var(--space-6) var(--space-5) var(--space-5);
+    }
+    .lib-hero__inner { max-width: 1100px; margin: 0 auto; }
+    .lib-hero__branding {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+    .lib-hero__seal-wrap {
+      width: 72px;
+      height: 72px;
+      background: var(--usa-primary-darker);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .lib-hero__agency {
+      font-family: var(--font-serif);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      color: var(--usa-primary);
+      margin-bottom: 6px;
+    }
+    .lib-hero__title {
+      font-family: var(--font-sans);
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--usa-primary-darker);
+      line-height: 1.1;
+      letter-spacing: -.5px;
+      margin-bottom: 6px;
+    }
+    .lib-hero__version {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--usa-primary-lighter);
+      color: var(--usa-primary-dark);
+      padding: 2px 10px;
+      border-radius: 12px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+    }
+    .lib-hero__desc {
+      font-size: 16px;
+      color: var(--usa-base-dark);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    /* ── Quick nav ────────────────────────────────────────────────────────── */
+    .lib-quicknav {
+      background: var(--usa-base-lightest);
+      border-bottom: 1px solid var(--usa-base-lighter);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .lib-quicknav__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+    }
+    .lib-quicknav a {
+      display: block;
+      padding: var(--space-105) var(--space-3);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--usa-base-darker);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: color .12s, border-color .12s, background .12s;
+    }
+    .lib-quicknav a:hover {
+      color: var(--usa-primary);
+      border-bottom-color: var(--usa-primary-light);
+      background: var(--usa-white);
+    }
+    .lib-quicknav a.active {
+      color: var(--usa-primary);
+      border-bottom-color: var(--usa-primary);
+      background: var(--usa-white);
+    }
+
+    /* ── Main ─────────────────────────────────────────────────────────────── */
+    .lib-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-5);
+    }
+
+    /* ── Section ──────────────────────────────────────────────────────────── */
+    .lib-section { margin-bottom: var(--space-8); }
+    .lib-section__header {
+      border-bottom: 3px solid var(--usa-primary);
+      padding-bottom: var(--space-2);
+      margin-bottom: var(--space-5);
+    }
+    .lib-section__title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--usa-primary-darker);
+      margin-bottom: 6px;
+    }
+    .lib-section__desc { font-size: 15px; color: var(--usa-base-dark); }
+
+    /* ── Subsection ───────────────────────────────────────────────────────── */
+    .lib-subsection { margin-bottom: var(--space-6); }
+    .lib-subsection__title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--usa-primary-darker);
+      margin-bottom: var(--space-2);
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+    .lib-subsection__title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: var(--usa-primary);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .lib-subsection__desc {
+      font-size: 14px;
+      color: var(--usa-base-dark);
+      margin-bottom: var(--space-3);
+    }
+
+    /* ── Demo area ────────────────────────────────────────────────────────── */
+    .lib-demo {
+      background: var(--usa-base-lightest);
+      border: 1px solid var(--usa-base-lighter);
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: var(--space-4);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+    .lib-demo--white { background: var(--usa-white); }
+    .lib-demo--column { flex-direction: column; }
+    .lib-demo--padded { padding: var(--space-5); }
+
+    /* ── Code block ───────────────────────────────────────────────────────── */
+    .lib-code {
+      position: relative;
+      border-radius: 0 0 var(--radius) var(--radius);
+      overflow: hidden;
+      margin-bottom: var(--space-3);
+    }
+    .lib-code pre {
+      background: var(--usa-primary-darker);
+      color: #c8d8eb;
+      margin: 0;
+      padding: var(--space-3) var(--space-4);
+      padding-right: 80px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .lib-code code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+    .lib-copy-btn {
+      position: absolute;
+      top: var(--space-1);
+      right: var(--space-1);
+      background: rgba(255,255,255,.12);
+      color: var(--usa-primary-lighter);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: var(--radius);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: background .15s;
+      white-space: nowrap;
+    }
+    .lib-copy-btn:hover {
+      background: rgba(255,255,255,.2);
+      color: var(--usa-white);
+    }
+    .lib-copy-btn.copied {
+      background: var(--usa-success);
+      color: var(--usa-white);
+      border-color: var(--usa-success);
+    }
+
+    /* ── Color swatches ───────────────────────────────────────────────────── */
+    .token-color-group { margin-bottom: var(--space-4); }
+    .token-color-group__label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--usa-base-dark);
+      margin-bottom: var(--space-2);
+    }
+    .token-color-row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+    .token-swatch { width: 140px; }
+    .token-swatch__color {
+      height: 60px;
+      border-radius: var(--radius) var(--radius) 0 0;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .token-swatch__info {
+      background: var(--usa-white);
+      border: 1px solid var(--usa-base-lighter);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 6px 8px;
+    }
+    .token-swatch__name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--usa-primary-dark);
+      line-height: 1.4;
+      word-break: break-all;
+    }
+    .token-swatch__hex {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--usa-base);
+      margin-top: 2px;
+    }
+
+    /* ── Spacing visualization ────────────────────────────────────────────── */
+    .token-spacing-row { display: flex; flex-direction: column; gap: 10px; }
+    .token-spacing-item { display: flex; align-items: center; gap: var(--space-3); }
+    .token-spacing-bar {
+      background: var(--usa-primary);
+      height: 16px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .token-spacing-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--usa-primary-dark);
+      min-width: 120px;
+    }
+    .token-spacing-px { font-size: 12px; color: var(--usa-base-dark); }
+
+    /* ── Type specimens ───────────────────────────────────────────────────── */
+    .type-specimen {
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--usa-base-lighter);
+    }
+    .type-specimen:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .type-specimen__label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--usa-base);
+      margin-bottom: 6px;
+    }
+    .type-specimen__meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--usa-base-light);
+      margin-top: 4px;
+    }
+
+    /* ── Font showcase ────────────────────────────────────────────────────── */
+    .font-showcase {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+      width: 100%;
+    }
+    .font-card {
+      background: var(--usa-white);
+      border: 1px solid var(--usa-base-lighter);
+      border-radius: var(--radius);
+      padding: var(--space-3);
+      overflow: hidden;
+    }
+    .font-card__label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--usa-base);
+      margin-bottom: 4px;
+    }
+    .font-card__name { font-size: 14px; font-weight: 700; color: var(--usa-primary-darker); }
+    .font-card__token {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--usa-primary-dark);
+      margin-bottom: var(--space-2);
+    }
+    .font-card__specimen-sans {
+      font-family: var(--font-sans);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--usa-ink);
+      line-height: 1.3;
+    }
+    .font-card__specimen-serif {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--usa-ink);
+      line-height: 1.3;
+    }
+    .font-card__specimen-mono {
+      font-family: var(--font-mono);
+      font-size: 17px;
+      color: var(--usa-ink);
+      line-height: 1.5;
+    }
+    .font-card__usage {
+      font-size: 12px;
+      color: var(--usa-base-dark);
+      margin-top: var(--space-1);
+      border-top: 1px solid var(--usa-base-lighter);
+      padding-top: var(--space-1);
+    }
+
+    /* ── Footer ───────────────────────────────────────────────────────────── */
+    .lib-footer {
+      background: var(--usa-primary-darker);
+      color: var(--usa-primary-lighter);
+      padding: var(--space-5);
+      text-align: center;
+      font-size: 13px;
+    }
+    .lib-footer a { color: var(--usa-primary-lighter); }
+    .lib-footer a:hover { color: var(--usa-white); }
+    .lib-footer strong { color: var(--usa-white); }
+
+    /* ── Token reference table ────────────────────────────────────────────── */
+    .token-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .token-table th {
+      text-align: left;
+      padding: var(--space-1) var(--space-2);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--usa-base-dark);
+      border-bottom: 2px solid var(--usa-base-lighter);
+    }
+    .token-table td {
+      padding: var(--space-1) var(--space-2);
+      border-bottom: 1px solid var(--usa-base-lightest);
+      vertical-align: middle;
+    }
+    .token-table tr:last-child td { border-bottom: none; }
+    .token-table code {
+      font-size: 12px;
+    }
+
+    /* ── Inline note / callout ────────────────────────────────────────────── */
+    .lib-note {
+      background: var(--usa-primary-lighter);
+      border-left: 4px solid var(--usa-primary);
+      padding: var(--space-2) var(--space-3);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 13px;
+      color: var(--usa-primary-dark);
+      margin-bottom: var(--space-3);
+    }
+    .lib-note strong { color: var(--usa-primary-darker); }
+
+    /* ── Responsive ───────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .lib-hero { padding: var(--space-4) var(--space-3) var(--space-3); }
+      .lib-hero__title { font-size: 28px; }
+      .lib-main { padding: var(--space-4) var(--space-3); }
+      .font-showcase { grid-template-columns: 1fr; }
+      .token-color-row { gap: var(--space-1); }
+      .token-swatch { width: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+
+  <!-- .gov Banner -->
+  <div class="usa-banner" role="banner">
+    <div class="usa-banner__header">
+      <div class="usa-banner__inner">
+        <img class="usa-banner__header-flag" src="../assets/us_flag_small.png" alt="U.S. flag">
+        <p class="usa-banner__header-text">An official website of the United States government</p>
+        <button class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-content" onclick="toggleBanner(this)">
+          <span class="usa-banner__button-text">Here's how you know</span>
+        </button>
+      </div>
+    </div>
+    <div class="usa-banner__content" id="gov-banner-content" hidden>
+      <div class="grid-row">
+        <div class="grid-col-auto usa-banner__guidance">
+          <img class="usa-banner__icon" src="../assets/icon-dot-gov.svg" alt="">
+          <div class="usa-media-block__body">
+            <p><strong>Official websites use .gov</strong><br>
+            A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
+          </div>
+        </div>
+        <div class="grid-col-auto usa-banner__guidance">
+          <img class="usa-banner__icon" src="../assets/icon-https.svg" alt="">
+          <div class="usa-media-block__body">
+            <p><strong>Secure .gov websites use HTTPS</strong><br>
+            A <strong>lock</strong> or <strong>https://</strong> means you've safely connected to the .gov website.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="lib-hero">
+    <div class="lib-hero__inner">
+      <div class="lib-hero__branding">
+        <div class="lib-hero__seal-wrap">
+          <img src="../assets/treasury-seal-white-simple.svg" alt="U.S. Department of the Treasury seal" width="56" height="56">
+        </div>
+        <div>
+          <p class="lib-hero__agency">U.S. Department of the Treasury</p>
+          <h1 class="lib-hero__title">TDDS Component Library</h1>
+          <span class="lib-hero__version">Version 1.0</span>
+        </div>
+      </div>
+      <p class="lib-hero__desc">
+        A visual reference and copy-ready code guide for the Treasury Digital Design System.
+        Every component shown here is built exclusively from <code>tdds.css</code> tokens — import the stylesheet and use the class names directly in any Treasury application.
+      </p>
+    </div>
+  </header>
+
+  <!-- Sticky section nav -->
+  <nav class="lib-quicknav" aria-label="Jump to section">
+    <div class="lib-quicknav__inner">
+      <a href="#tokens">Design Tokens</a>
+      <a href="#typography">Typography</a>
+      <a href="#buttons">Buttons</a>
+      <a href="#forms">Form Controls</a>
+      <a href="#data">Data Display</a>
+      <a href="#feedback">Feedback &amp; Alerts</a>
+      <a href="#layout">Layout &amp; Shell</a>
+    </div>
+  </nav>
+
+  <main id="main-content" class="lib-main">
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         DESIGN TOKENS
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section id="tokens" class="lib-section">
+      <div class="lib-section__header">
+        <h2 class="lib-section__title">Design Tokens</h2>
+        <p class="lib-section__desc">All TDDS values are CSS custom properties on <code>:root</code>. Import <code>tdds.css</code> and reference them with <code>var(--token-name)</code>. Never hardcode hex values or raw pixel sizes — every value has a token equivalent.</p>
+      </div>
+
+      <!-- Colors: Primary -->
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Color Tokens</h3>
+        <p class="lib-subsection__desc">Organized by color family. Consult the quick-reference table in TDDS.md for which token to use in each context.</p>
+
+        <div class="token-color-group">
+          <div class="token-color-group__label">Primary — Treasury Blue</div>
+          <div class="token-color-row">
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-primary-lighter)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-primary-lighter</div>
+                <div class="token-swatch__hex">#d9e8f6</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-primary-light)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-primary-light</div>
+                <div class="token-swatch__hex">#73b3e7</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-primary)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-primary</div>
+                <div class="token-swatch__hex">#005ea2</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-primary-vivid)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-primary-vivid</div>
+                <div class="token-swatch__hex">#0050d8</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-primary-dark)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-primary-dark</div>
+                <div class="token-swatch__hex">#1a4480</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-primary-darker)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-primary-darker</div>
+                <div class="token-swatch__hex">#162e51</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="token-color-group">
+          <div class="token-color-group__label">Secondary — Alert Red</div>
+          <div class="token-color-row">
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-secondary)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-secondary</div>
+                <div class="token-swatch__hex">#d83933</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-secondary-dark)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-secondary-dark</div>
+                <div class="token-swatch__hex">#b50909</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="token-color-group">
+          <div class="token-color-group__label">Accent Cool — Cyan</div>
+          <div class="token-color-row">
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-accent-cool-lighter)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-accent-cool-lighter</div>
+                <div class="token-swatch__hex">#e1f3f8</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-accent-cool)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-accent-cool</div>
+                <div class="token-swatch__hex">#00bde3</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-accent-cool-dark)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-accent-cool-dark</div>
+                <div class="token-swatch__hex">#28a0cb</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-accent-cool-darker)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-accent-cool-darker</div>
+                <div class="token-swatch__hex">#07648d</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="token-color-group">
+          <div class="token-color-group__label">Accent Warm — Orange</div>
+          <div class="token-color-row">
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-accent-warm-light)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-accent-warm-light</div>
+                <div class="token-swatch__hex">#ffbc78</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-accent-warm)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-accent-warm</div>
+                <div class="token-swatch__hex">#fa9441</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-accent-warm-dark)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-accent-warm-dark</div>
+                <div class="token-swatch__hex">#c05600</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="token-color-group">
+          <div class="token-color-group__label">Status</div>
+          <div class="token-color-row">
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-success-lighter)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-success-lighter</div>
+                <div class="token-swatch__hex">#ecf3ec</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-success)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-success</div>
+                <div class="token-swatch__hex">#00a91c</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-success-dark)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-success-dark</div>
+                <div class="token-swatch__hex">#008817</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-warning-lighter)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-warning-lighter</div>
+                <div class="token-swatch__hex">#faf3d1</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-warning)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-warning</div>
+                <div class="token-swatch__hex">#ffbe2e</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-warning-dark)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-warning-dark</div>
+                <div class="token-swatch__hex">#e5a000</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-error-lighter)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-error-lighter</div>
+                <div class="token-swatch__hex">#f4e3db</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-error)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-error</div>
+                <div class="token-swatch__hex">#d54309</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-error-dark)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-error-dark</div>
+                <div class="token-swatch__hex">#b50909</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="token-color-group">
+          <div class="token-color-group__label">Neutrals</div>
+          <div class="token-color-row">
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-white);border:1px solid var(--usa-base-lighter)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-white</div>
+                <div class="token-swatch__hex">#ffffff</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-base-lightest)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-base-lightest</div>
+                <div class="token-swatch__hex">#f0f0f0</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-base-lighter)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-base-lighter</div>
+                <div class="token-swatch__hex">#dfe1e2</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-base-light)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-base-light</div>
+                <div class="token-swatch__hex">#a9aeb1</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-base)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-base</div>
+                <div class="token-swatch__hex">#71767a</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-base-dark)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-base-dark</div>
+                <div class="token-swatch__hex">#565c65</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-base-darker)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-base-darker</div>
+                <div class="token-swatch__hex">#3d4551</div>
+              </div>
+            </div>
+            <div class="token-swatch">
+              <div class="token-swatch__color" style="background:var(--usa-base-darkest)"></div>
+              <div class="token-swatch__info">
+                <div class="token-swatch__name">--usa-base-darkest</div>
+                <div class="token-swatch__hex">#1b1b1b</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Context reference table -->
+        <div class="lib-demo lib-demo--white" style="padding: var(--space-3);">
+          <table class="token-table" style="width:100%">
+            <thead>
+              <tr>
+                <th>Context</th>
+                <th>Token to use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Page/section title text</td><td><code>--usa-primary-darker</code></td></tr>
+              <tr><td>Header background, modal header</td><td><code>--usa-primary-darker</code></td></tr>
+              <tr><td>Button background, links</td><td><code>--usa-primary</code></td></tr>
+              <tr><td>Button hover</td><td><code>--usa-primary-dark</code></td></tr>
+              <tr><td>Focus ring</td><td><code>--usa-primary-vivid</code></td></tr>
+              <tr><td>Hover row bg, tinted panel</td><td><code>--usa-primary-lighter</code></td></tr>
+              <tr><td>Icon / decorative on dark bg</td><td><code>--usa-primary-light</code></td></tr>
+              <tr><td>Page background</td><td><code>--usa-base-lightest</code></td></tr>
+              <tr><td>Borders, dividers</td><td><code>--usa-base-lighter</code></td></tr>
+              <tr><td>Secondary text</td><td><code>--usa-base-dark</code></td></tr>
+              <tr><td>Body text</td><td><code>--usa-ink</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Spacing -->
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Spacing Scale</h3>
+        <p class="lib-subsection__desc">All spacing uses an 8px base unit. Use tokens for every margin, padding, and gap. Never use arbitrary pixel values like <code>margin: 10px</code>.</p>
+        <div class="lib-demo lib-demo--white lib-demo--column">
+          <div class="token-spacing-row">
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-05</div><div class="token-spacing-bar" style="width:4px"></div><div class="token-spacing-px">4px</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-1</div><div class="token-spacing-bar" style="width:8px"></div><div class="token-spacing-px">8px</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-105</div><div class="token-spacing-bar" style="width:12px"></div><div class="token-spacing-px">12px</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-2</div><div class="token-spacing-bar" style="width:16px"></div><div class="token-spacing-px">16px</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-205</div><div class="token-spacing-bar" style="width:20px"></div><div class="token-spacing-px">20px</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-3</div><div class="token-spacing-bar" style="width:24px"></div><div class="token-spacing-px">24px</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-4</div><div class="token-spacing-bar" style="width:32px"></div><div class="token-spacing-px">32px</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-5</div><div class="token-spacing-bar" style="width:40px"></div><div class="token-spacing-px">40px — page padding</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-6</div><div class="token-spacing-bar" style="width:48px"></div><div class="token-spacing-px">48px</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-7</div><div class="token-spacing-bar" style="width:56px"></div><div class="token-spacing-px">56px</div></div>
+            <div class="token-spacing-item"><div class="token-spacing-label">--space-8</div><div class="token-spacing-bar" style="width:64px"></div><div class="token-spacing-px">64px — header height</div></div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>/* Use tokens for all spacing */
+padding: var(--space-3);           /* 24px */
+margin-bottom: var(--space-4);     /* 32px */
+gap: var(--space-2);               /* 16px */
+
+/* ❌ Never use arbitrary values */
+/* margin: 18px — round to var(--space-2) or var(--space-3) */</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <!-- Layout constants -->
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Layout Constants</h3>
+        <div class="lib-demo lib-demo--white" style="padding: var(--space-3)">
+          <table class="token-table" style="width:100%">
+            <thead>
+              <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--sidebar-width</code></td><td>240px</td><td>Sidebar container width</td></tr>
+              <tr><td><code>--max-content</code></td><td>1200px</td><td>Max-width of <code>.usa-page</code></td></tr>
+              <tr><td><code>--radius</code></td><td>4px</td><td>Standard border-radius</td></tr>
+              <tr><td><code>--shadow-1</code></td><td>0 1px 4px rgba(0,0,0,.1)</td><td>Cards, inputs</td></tr>
+              <tr><td><code>--shadow-2</code></td><td>0 4px 12px rgba(0,0,0,.12)</td><td>Hovered cards</td></tr>
+              <tr><td><code>--shadow-3</code></td><td>0 8px 24px rgba(0,0,0,.14)</td><td>Modals, login card</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         TYPOGRAPHY
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section id="typography" class="lib-section">
+      <div class="lib-section__header">
+        <h2 class="lib-section__title">Typography</h2>
+        <p class="lib-section__desc">TDDS uses three typefaces, each with a defined role. Load all three via the Google Fonts link and reference only the token names — never set <code>font-family</code> to a raw font name.</p>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Font Families</h3>
+        <div class="lib-demo lib-demo--white">
+          <div class="font-showcase">
+            <div class="font-card">
+              <div class="font-card__label">Primary — body &amp; UI</div>
+              <div class="font-card__name">Public Sans</div>
+              <div class="font-card__token">var(--font-sans)</div>
+              <div class="font-card__specimen-sans">Aa Bb Cc 012</div>
+              <div class="font-card__usage">Body text, labels, buttons, nav, all UI chrome — the default for everything</div>
+            </div>
+            <div class="font-card">
+              <div class="font-card__label">Accent — titles &amp; stats</div>
+              <div class="font-card__name">Merriweather</div>
+              <div class="font-card__token">var(--font-serif)</div>
+              <div class="font-card__specimen-serif">Aa Bb Cc 012</div>
+              <div class="font-card__usage">Page titles, stat values, empty-state headings, login card title — nothing else</div>
+            </div>
+            <div class="font-card">
+              <div class="font-card__label">Technical — code &amp; IDs</div>
+              <div class="font-card__name">Roboto Mono</div>
+              <div class="font-card__token">var(--font-mono)</div>
+              <div class="font-card__specimen-mono">Aa Bb Cc 012</div>
+              <div class="font-card__usage">Code snippets, system IDs, token names, technical strings</div>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;!-- Required in &lt;head&gt; --&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&amp;family=Public+Sans:wght@400;500;600;700;800&amp;family=Roboto+Mono&amp;display=swap" rel="stylesheet"&gt;
+
+/* Then reference only via tokens */
+font-family: var(--font-sans);    /* Public Sans */
+font-family: var(--font-serif);   /* Merriweather */
+font-family: var(--font-mono);    /* Roboto Mono */</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Type Scale</h3>
+        <div class="lib-demo lib-demo--white lib-demo--column lib-demo--padded">
+          <div class="type-specimen">
+            <div class="type-specimen__label">Page Title — .usa-page-title</div>
+            <h2 class="usa-page-title" style="font-size:28px">Treasury Operations Hub</h2>
+            <div class="type-specimen__meta">Merriweather · 28px · 900 · var(--usa-primary-darker)</div>
+          </div>
+          <div class="type-specimen">
+            <div class="type-specimen__label">Section Title — .section-title</div>
+            <div class="section-title">Active Projects</div>
+            <div class="type-specimen__meta">Public Sans · 17px · 800 · var(--usa-primary-darker)</div>
+          </div>
+          <div class="type-specimen">
+            <div class="type-specimen__label">Card Header Title — .usa-card__header-title</div>
+            <div class="usa-card__header-title">Recent Activity</div>
+            <div class="type-specimen__meta">Public Sans · 15px · 700 · var(--usa-base-darkest)</div>
+          </div>
+          <div class="type-specimen">
+            <div class="type-specimen__label">Stat Value — .stat-value</div>
+            <div class="stat-value">2,847</div>
+            <div class="type-specimen__meta">Merriweather · 36px · 900 · var(--usa-primary-darker)</div>
+          </div>
+          <div class="type-specimen">
+            <div class="type-specimen__label">Body — default</div>
+            <p>Treasury applications use Public Sans for all body text. Maintain a line-height of 1.62 for readability across data-dense interfaces. The base font size is 16px.</p>
+            <div class="type-specimen__meta">Public Sans · 16px · 400 · var(--usa-ink)</div>
+          </div>
+          <div class="type-specimen">
+            <div class="type-specimen__label">Label — .usa-label</div>
+            <label class="usa-label" style="margin:0">Field Label</label>
+            <div class="type-specimen__meta">Public Sans · 14px · 700 · var(--usa-ink)</div>
+          </div>
+          <div class="type-specimen">
+            <div class="type-specimen__label">Hint / Caption — .usa-hint</div>
+            <span class="usa-hint">Optional helper text describing the expected input format.</span>
+            <div class="type-specimen__meta">Public Sans · 13px · 400 · var(--usa-base-dark)</div>
+          </div>
+          <div class="type-specimen">
+            <div class="type-specimen__label">Stat Label / Badge — .stat-label</div>
+            <div class="stat-label">Total Active Licenses</div>
+            <div class="type-specimen__meta">Public Sans · 11px · 700 · uppercase · 0.08em tracking · var(--usa-base-dark)</div>
+          </div>
+          <div class="type-specimen">
+            <div class="type-specimen__label">Inline Code — &lt;code&gt;</div>
+            <code>var(--usa-primary-darker)</code>
+            <div class="type-specimen__meta">Roboto Mono · 0.875em · var(--usa-primary-dark) on light background</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         BUTTONS
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section id="buttons" class="lib-section">
+      <div class="lib-section__header">
+        <h2 class="lib-section__title">Buttons</h2>
+        <p class="lib-section__desc">All buttons use the <code>.usa-button</code> base class plus a variant modifier. Base styles: 15px, 700 weight, 2px border, 4px radius, 10px / 20px padding.</p>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Variants</h3>
+        <div class="lib-demo">
+          <button class="usa-button usa-button--primary">Primary</button>
+          <button class="usa-button usa-button--secondary">Secondary</button>
+          <button class="usa-button usa-button--outline">Outline</button>
+          <button class="usa-button usa-button--success">Success</button>
+          <button class="usa-button usa-button--danger">Danger</button>
+          <button class="usa-button usa-button--unstyled">Unstyled</button>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;!-- Primary action --&gt;
+&lt;button class="usa-button usa-button--primary"&gt;Save&lt;/button&gt;
+
+&lt;!-- Secondary / neutral --&gt;
+&lt;button class="usa-button usa-button--secondary"&gt;Cancel&lt;/button&gt;
+
+&lt;!-- Outlined --&gt;
+&lt;button class="usa-button usa-button--outline"&gt;Export&lt;/button&gt;
+
+&lt;!-- Confirm / approve --&gt;
+&lt;button class="usa-button usa-button--success"&gt;Approve&lt;/button&gt;
+
+&lt;!-- Destructive action --&gt;
+&lt;button class="usa-button usa-button--danger"&gt;Delete&lt;/button&gt;
+
+&lt;!-- Link-style, no border or background --&gt;
+&lt;button class="usa-button usa-button--unstyled"&gt;View details&lt;/button&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Small Buttons — <code>.usa-button--sm</code></h3>
+        <p class="lib-subsection__desc">Reduced to 13px / 6px–14px padding. Use inside tables, card headers, toolbars, and filter bars.</p>
+        <div class="lib-demo">
+          <button class="usa-button usa-button--primary usa-button--sm">View</button>
+          <button class="usa-button usa-button--outline usa-button--sm">Export</button>
+          <button class="usa-button usa-button--secondary usa-button--sm">Cancel</button>
+          <button class="usa-button usa-button--danger usa-button--sm">Remove</button>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;button class="usa-button usa-button--primary usa-button--sm"&gt;View&lt;/button&gt;
+&lt;button class="usa-button usa-button--outline usa-button--sm"&gt;Export&lt;/button&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Disabled State</h3>
+        <div class="lib-demo">
+          <button class="usa-button usa-button--primary" disabled>Primary Disabled</button>
+          <button class="usa-button usa-button--outline" disabled>Outline Disabled</button>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;!-- The disabled attribute reduces opacity to .5 and blocks pointer events --&gt;
+&lt;button class="usa-button usa-button--primary" disabled&gt;Disabled&lt;/button&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         FORM CONTROLS
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section id="forms" class="lib-section">
+      <div class="lib-section__header">
+        <h2 class="lib-section__title">Form Controls</h2>
+        <p class="lib-section__desc">Inputs use a 2px border in <code>var(--usa-base)</code> with a vivid blue focus ring. Always pair an input with a <code>.usa-label</code>. Hint text and error messages sit below the input.</p>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Text Input</h3>
+        <div class="lib-demo lib-demo--white lib-demo--column" style="max-width:480px">
+          <div class="usa-form-group">
+            <label class="usa-label" for="demo-input">CAIA ID</label>
+            <input id="demo-input" class="usa-input" type="text" placeholder="Enter your CAIA ID">
+            <span class="usa-hint">Your CAIA ID can be found in the employee directory.</span>
+          </div>
+          <div class="usa-form-group">
+            <label class="usa-label" for="demo-input-err">Required Field</label>
+            <input id="demo-input-err" class="usa-input" type="text" value="bad input">
+            <span class="usa-error-message">This field is required and must be a valid email address.</span>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="usa-form-group"&gt;
+  &lt;label class="usa-label" for="field-id"&gt;Field Label&lt;/label&gt;
+  &lt;input id="field-id" class="usa-input" type="text" /&gt;
+  &lt;span class="usa-hint"&gt;Optional helper text.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Error state --&gt;
+&lt;div class="usa-form-group"&gt;
+  &lt;label class="usa-label" for="field-err"&gt;Required Field&lt;/label&gt;
+  &lt;input id="field-err" class="usa-input" type="text" /&gt;
+  &lt;span class="usa-error-message"&gt;This field is required.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Select</h3>
+        <div class="lib-demo lib-demo--white lib-demo--column" style="max-width:480px">
+          <div class="usa-form-group">
+            <label class="usa-label" for="demo-select">Status</label>
+            <select id="demo-select" class="usa-select">
+              <option value="">— Select —</option>
+              <option>Active</option>
+              <option>Pending Approval</option>
+              <option>Closed</option>
+            </select>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="usa-form-group"&gt;
+  &lt;label class="usa-label" for="status"&gt;Status&lt;/label&gt;
+  &lt;select id="status" class="usa-select"&gt;
+    &lt;option value=""&gt;— Select —&lt;/option&gt;
+    &lt;option&gt;Active&lt;/option&gt;
+    &lt;option&gt;Pending Approval&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Textarea</h3>
+        <div class="lib-demo lib-demo--white lib-demo--column" style="max-width:480px">
+          <div class="usa-form-group">
+            <label class="usa-label" for="demo-ta">Justification Notes</label>
+            <textarea id="demo-ta" class="usa-textarea" placeholder="Describe the business need…"></textarea>
+            <span class="usa-hint">Minimum 50 characters required for access requests.</span>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="usa-form-group"&gt;
+  &lt;label class="usa-label" for="notes"&gt;Notes&lt;/label&gt;
+  &lt;textarea id="notes" class="usa-textarea"&gt;&lt;/textarea&gt;
+  &lt;span class="usa-hint"&gt;Helper text.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Two-Column Form Grid — <code>.form-grid</code></h3>
+        <p class="lib-subsection__desc">Wrap pairs of <code>.usa-form-group</code> elements in <code>.form-grid</code> for a responsive 1fr / 1fr layout.</p>
+        <div class="lib-demo lib-demo--white lib-demo--column">
+          <div class="form-grid" style="width:100%;max-width:640px">
+            <div class="usa-form-group">
+              <label class="usa-label" for="demo-first">First Name</label>
+              <input id="demo-first" class="usa-input" type="text">
+            </div>
+            <div class="usa-form-group">
+              <label class="usa-label" for="demo-last">Last Name</label>
+              <input id="demo-last" class="usa-input" type="text">
+            </div>
+            <div class="usa-form-group">
+              <label class="usa-label" for="demo-email">Work Email</label>
+              <input id="demo-email" class="usa-input" type="email">
+            </div>
+            <div class="usa-form-group">
+              <label class="usa-label" for="demo-dept">Bureau</label>
+              <select id="demo-dept" class="usa-select">
+                <option>— Select —</option>
+                <option>Fiscal Service</option>
+                <option>IRS</option>
+                <option>OCC</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="form-grid"&gt;
+  &lt;div class="usa-form-group"&gt;
+    &lt;label class="usa-label" for="first"&gt;First Name&lt;/label&gt;
+    &lt;input id="first" class="usa-input" type="text" /&gt;
+  &lt;/div&gt;
+  &lt;div class="usa-form-group"&gt;
+    &lt;label class="usa-label" for="last"&gt;Last Name&lt;/label&gt;
+    &lt;input id="last" class="usa-input" type="text" /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Filter Bar — <code>.filter-bar</code></h3>
+        <p class="lib-subsection__desc">Sits at the top of tables and data lists. Combines search, filter selects, and action buttons in a flex row that wraps on narrow viewports.</p>
+        <div class="lib-demo lib-demo--white lib-demo--column">
+          <div class="filter-bar" style="width:100%">
+            <div class="filter-bar__search">
+              <input class="usa-input" type="search" placeholder="Search by name or ID…">
+            </div>
+            <select class="usa-select">
+              <option>All Statuses</option>
+              <option>Active</option>
+              <option>Pending</option>
+              <option>Closed</option>
+            </select>
+            <select class="usa-select">
+              <option>All Bureaus</option>
+              <option>Fiscal Service</option>
+              <option>IRS</option>
+            </select>
+            <button class="usa-button usa-button--outline usa-button--sm">Clear</button>
+            <button class="usa-button usa-button--primary usa-button--sm">Add New</button>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="filter-bar"&gt;
+  &lt;div class="filter-bar__search"&gt;
+    &lt;input class="usa-input" type="search" placeholder="Search…" /&gt;
+  &lt;/div&gt;
+  &lt;select class="usa-select"&gt;
+    &lt;option&gt;All Statuses&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;button class="usa-button usa-button--outline usa-button--sm"&gt;Clear&lt;/button&gt;
+  &lt;button class="usa-button usa-button--primary usa-button--sm"&gt;Add New&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         DATA DISPLAY
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section id="data" class="lib-section">
+      <div class="lib-section__header">
+        <h2 class="lib-section__title">Data Display</h2>
+        <p class="lib-section__desc">Components for presenting structured data — metric cards, tables, and general-purpose containers.</p>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Stat Cards — <code>.stat-grid</code> / <code>.stat-card</code></h3>
+        <p class="lib-subsection__desc">Place at the top of dashboard pages for key metrics. The top border color indicates status. Stat values use Merriweather serif at 36px / 900 weight.</p>
+        <div class="lib-demo lib-demo--column">
+          <div class="stat-grid" style="width:100%">
+            <div class="stat-card">
+              <div class="stat-label">Total Projects</div>
+              <div class="stat-value">142</div>
+            </div>
+            <div class="stat-card success">
+              <div class="stat-label">On Schedule</div>
+              <div class="stat-value success">98</div>
+            </div>
+            <div class="stat-card warn">
+              <div class="stat-label">At Risk</div>
+              <div class="stat-value warn">31</div>
+            </div>
+            <div class="stat-card danger">
+              <div class="stat-label">Overdue</div>
+              <div class="stat-value danger">13</div>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="stat-grid"&gt;
+
+  &lt;!-- Default — primary blue top border --&gt;
+  &lt;div class="stat-card"&gt;
+    &lt;div class="stat-label"&gt;TOTAL PROJECTS&lt;/div&gt;
+    &lt;div class="stat-value"&gt;142&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Success — green top border --&gt;
+  &lt;div class="stat-card success"&gt;
+    &lt;div class="stat-label"&gt;ON SCHEDULE&lt;/div&gt;
+    &lt;div class="stat-value success"&gt;98&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Warning — amber top border --&gt;
+  &lt;div class="stat-card warn"&gt;
+    &lt;div class="stat-label"&gt;AT RISK&lt;/div&gt;
+    &lt;div class="stat-value warn"&gt;31&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Danger — red top border --&gt;
+  &lt;div class="stat-card danger"&gt;
+    &lt;div class="stat-label"&gt;OVERDUE&lt;/div&gt;
+    &lt;div class="stat-value danger"&gt;13&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Data Table — <code>.usa-table</code></h3>
+        <p class="lib-subsection__desc">Always wrap in <code>.table-wrap</code> for horizontal scroll on small viewports. Table headers: navy background, white text, 11px uppercase. Rows highlight on hover with <code>var(--usa-primary-lighter)</code>.</p>
+        <div class="lib-demo lib-demo--column" style="padding:var(--space-3)">
+          <div class="table-wrap" style="width:100%">
+            <table class="usa-table">
+              <thead>
+                <tr>
+                  <th>Project</th>
+                  <th>Bureau</th>
+                  <th>Owner</th>
+                  <th>Status</th>
+                  <th>Due Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CAIA Integration v2</td>
+                  <td>Fiscal Service</td>
+                  <td>J. Williams</td>
+                  <td><span class="usa-tag usa-tag--blue">Active</span></td>
+                  <td>May 30, 2026</td>
+                  <td><button class="usa-button usa-button--outline usa-button--sm">View</button></td>
+                </tr>
+                <tr>
+                  <td>Audit Log Migration</td>
+                  <td>IRS</td>
+                  <td>R. Chen</td>
+                  <td><span class="usa-tag usa-tag--yellow">Pending</span></td>
+                  <td>Jun 15, 2026</td>
+                  <td><button class="usa-button usa-button--outline usa-button--sm">View</button></td>
+                </tr>
+                <tr>
+                  <td>PIV Enrollment Portal</td>
+                  <td>OCC</td>
+                  <td>M. Johnson</td>
+                  <td><span class="usa-tag usa-tag--green">Complete</span></td>
+                  <td>Apr 10, 2026</td>
+                  <td><button class="usa-button usa-button--outline usa-button--sm">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="table-wrap"&gt;
+  &lt;table class="usa-table"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Project&lt;/th&gt;
+        &lt;th&gt;Owner&lt;/th&gt;
+        &lt;th&gt;Status&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;CAIA Integration v2&lt;/td&gt;
+        &lt;td&gt;J. Williams&lt;/td&gt;
+        &lt;td&gt;&lt;span class="usa-tag usa-tag--blue"&gt;Active&lt;/span&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Card — <code>.usa-card</code></h3>
+        <p class="lib-subsection__desc">General-purpose container for grouping related content. Header, body, and footer are all optional. The card header is white on white with a bottom border separator.</p>
+        <div class="lib-demo">
+          <div class="usa-card" style="width:320px">
+            <div class="usa-card__header">
+              <span class="usa-card__header-title">License Summary</span>
+              <button class="usa-button usa-button--sm usa-button--outline">Export</button>
+            </div>
+            <div class="usa-card__body">
+              <p>This card body can hold any content — text, lists, forms, or nested components. Keep it focused on a single topic.</p>
+            </div>
+            <div class="usa-card__footer">
+              <button class="usa-button usa-button--primary usa-button--sm">Request Access</button>
+              <button class="usa-button usa-button--secondary usa-button--sm">Cancel</button>
+            </div>
+          </div>
+          <div class="usa-card" style="width:320px">
+            <div class="usa-card__header">
+              <span class="usa-card__header-title">Activity Feed</span>
+            </div>
+            <div class="usa-card__body">
+              <p style="font-size:14px;color:var(--usa-base-dark);margin-bottom:var(--space-1)">Apr 21 — License assigned to R. Chen</p>
+              <p style="font-size:14px;color:var(--usa-base-dark);margin-bottom:var(--space-1)">Apr 20 — Access request approved</p>
+              <p style="font-size:14px;color:var(--usa-base-dark)">Apr 19 — Request submitted by M. Johnson</p>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="usa-card"&gt;
+  &lt;div class="usa-card__header"&gt;
+    &lt;span class="usa-card__header-title"&gt;License Summary&lt;/span&gt;
+    &lt;button class="usa-button usa-button--sm usa-button--outline"&gt;Export&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="usa-card__body"&gt;
+    &lt;!-- content --&gt;
+  &lt;/div&gt;
+  &lt;div class="usa-card__footer"&gt;
+    &lt;button class="usa-button usa-button--primary usa-button--sm"&gt;Save&lt;/button&gt;
+    &lt;button class="usa-button usa-button--secondary usa-button--sm"&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         FEEDBACK & ALERTS
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section id="feedback" class="lib-section">
+      <div class="lib-section__header">
+        <h2 class="lib-section__title">Feedback &amp; Alerts</h2>
+        <p class="lib-section__desc">Tags for status labels, alert banners for user feedback, and state indicators for loading and empty views.</p>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Tags &amp; Badges — <code>.usa-tag</code></h3>
+        <p class="lib-subsection__desc">12px, 700 weight, uppercase, 0.04em letter-spacing, 3px border-radius. Use for classification labels and status chips — never use emojis for this purpose.</p>
+        <div class="lib-demo">
+          <span class="usa-tag usa-tag--blue">Active</span>
+          <span class="usa-tag usa-tag--green">Approved</span>
+          <span class="usa-tag usa-tag--red">Denied</span>
+          <span class="usa-tag usa-tag--yellow">Pending</span>
+          <span class="usa-tag usa-tag--gray">Cancelled</span>
+          <span class="usa-tag usa-tag--cyan">In Review</span>
+          <span class="usa-tag usa-tag--orange">On Hold</span>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;span class="usa-tag usa-tag--blue"&gt;Active&lt;/span&gt;
+&lt;span class="usa-tag usa-tag--green"&gt;Approved&lt;/span&gt;
+&lt;span class="usa-tag usa-tag--red"&gt;Denied&lt;/span&gt;
+&lt;span class="usa-tag usa-tag--yellow"&gt;Pending&lt;/span&gt;
+&lt;span class="usa-tag usa-tag--gray"&gt;Cancelled&lt;/span&gt;
+&lt;span class="usa-tag usa-tag--cyan"&gt;In Review&lt;/span&gt;
+&lt;span class="usa-tag usa-tag--orange"&gt;On Hold&lt;/span&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Alert Banners — <code>.usa-alert</code></h3>
+        <p class="lib-subsection__desc">6px left border with a semantic tinted background. Add <code>role="alert"</code> on success and error alerts for live-region announcements.</p>
+        <div class="lib-demo lib-demo--white lib-demo--column" style="max-width:640px">
+          <div class="usa-alert usa-alert--success" role="alert">
+            <strong>Success.</strong> Your access request has been submitted and is pending approval.
+          </div>
+          <div class="usa-alert usa-alert--info">
+            <strong>Information.</strong> The maintenance window is scheduled for Saturday, May 2, 2–4 AM ET.
+          </div>
+          <div class="usa-alert usa-alert--warning">
+            <strong>Warning.</strong> Your session will expire in 5 minutes. Save your work now.
+          </div>
+          <div class="usa-alert usa-alert--error" role="alert">
+            <strong>Error.</strong> Unable to process your request. Contact your system administrator.
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="usa-alert usa-alert--success" role="alert"&gt;
+  &lt;strong&gt;Success.&lt;/strong&gt; Your request has been submitted.
+&lt;/div&gt;
+
+&lt;div class="usa-alert usa-alert--info"&gt;
+  &lt;strong&gt;Information.&lt;/strong&gt; Maintenance window this Saturday.
+&lt;/div&gt;
+
+&lt;div class="usa-alert usa-alert--warning"&gt;
+  &lt;strong&gt;Warning.&lt;/strong&gt; Session expires in 5 minutes.
+&lt;/div&gt;
+
+&lt;div class="usa-alert usa-alert--error" role="alert"&gt;
+  &lt;strong&gt;Error.&lt;/strong&gt; Unable to process your request.
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Loading &amp; Empty States</h3>
+        <p class="lib-subsection__desc">Use <code>.page-loading</code> while data fetches and <code>.empty-state</code> when a query returns no results. Always use USWDS SVG sprite icons — never emojis — in empty state icons.</p>
+        <div class="lib-demo lib-demo--white">
+          <div class="page-loading" style="flex:1;min-height:140px">
+            <span class="usa-spinner" aria-hidden="true"></span>
+            Loading projects…
+          </div>
+          <div class="empty-state" style="flex:1">
+            <div class="empty-state__icon">
+              <!-- In production: use USWDS sprite — see code snippet below -->
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <rect width="48" height="48" rx="6" fill="var(--usa-base-lighter)"/>
+                <rect x="12" y="20" width="24" height="3" rx="1.5" fill="var(--usa-base)"/>
+                <rect x="12" y="27" width="16" height="3" rx="1.5" fill="var(--usa-base-light)"/>
+              </svg>
+            </div>
+            <h3>No results found</h3>
+            <p>Try adjusting your search or filter criteria.</p>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;!-- Loading state --&gt;
+&lt;div class="page-loading"&gt;
+  &lt;span class="usa-spinner" aria-hidden="true"&gt;&lt;/span&gt;
+  Loading…
+&lt;/div&gt;
+
+&lt;!-- Empty state — use USWDS SVG sprite, never emojis --&gt;
+&lt;div class="empty-state"&gt;
+  &lt;div class="empty-state__icon"&gt;
+    &lt;svg class="usa-icon" aria-hidden="true" focusable="false"
+         style="width:48px;height:48px"&gt;
+      &lt;use href="/assets/img/sprite.svg#search"&gt;&lt;/use&gt;
+    &lt;/svg&gt;
+  &lt;/div&gt;
+  &lt;h3&gt;No results found&lt;/h3&gt;
+  &lt;p&gt;Try adjusting your filters.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Download the USWDS sprite (one-time setup) --&gt;
+&lt;!-- curl -L "https://cdn.jsdelivr.net/npm/@uswds/uswds/packages/uswds-core/src/img/sprite.svg" \
+     -o public/assets/img/sprite.svg --&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         LAYOUT & SHELL
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section id="layout" class="lib-section">
+      <div class="lib-section__header">
+        <h2 class="lib-section__title">Layout &amp; Shell</h2>
+        <p class="lib-section__desc">The authenticated page shell, page header pattern, and modal dialog component. These are structural — every authenticated view must follow the shell spec exactly.</p>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Page Header — <code>.usa-page-header</code></h3>
+        <p class="lib-subsection__desc">Every page inside <code>.usa-main</code> opens with a page header: title and subtitle left, action buttons right. The 2px primary-blue bottom border is mandatory.</p>
+        <div class="lib-demo lib-demo--white lib-demo--column">
+          <div class="usa-page-header" style="width:100%;margin-bottom:0">
+            <div>
+              <h2 class="usa-page-title" style="font-size:28px">Active Projects</h2>
+              <p class="usa-page-subtitle">142 projects across 14 bureaus</p>
+            </div>
+            <div class="flex gap-2">
+              <button class="usa-button usa-button--outline usa-button--sm">Export</button>
+              <button class="usa-button usa-button--primary usa-button--sm">New Project</button>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="usa-page-header"&gt;
+  &lt;div&gt;
+    &lt;h1 class="usa-page-title"&gt;Active Projects&lt;/h1&gt;
+    &lt;p class="usa-page-subtitle"&gt;142 projects across 14 bureaus&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="flex gap-2"&gt;
+    &lt;button class="usa-button usa-button--outline usa-button--sm"&gt;Export&lt;/button&gt;
+    &lt;button class="usa-button usa-button--primary usa-button--sm"&gt;New Project&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Modal Dialog — <code>.usa-modal</code></h3>
+        <p class="lib-subsection__desc">The modal header always uses <code>var(--usa-primary-darker)</code> background. Use <code>role="dialog"</code>, <code>aria-modal="true"</code>, and <code>aria-labelledby</code>. Always include a close button with <code>aria-label="Close"</code>.</p>
+        <div class="lib-demo lib-demo--padded" style="min-height:280px;position:relative;overflow:hidden;padding:0">
+          <div style="position:absolute;inset:0;background:rgba(27,27,27,.55);display:flex;align-items:center;justify-content:center;padding:var(--space-4)">
+            <div class="usa-modal" style="position:relative;z-index:1;max-height:none">
+              <div class="usa-modal__header">
+                <h2 class="usa-modal__heading" id="demo-modal-heading">Confirm Deactivation</h2>
+                <button class="usa-modal__close" aria-label="Close">&#x2715;</button>
+              </div>
+              <div class="usa-modal__body">
+                <p>Are you sure you want to deactivate <strong>M. Johnson</strong>? Their active licenses will be suspended. This action can be reversed by an administrator.</p>
+              </div>
+              <div class="usa-modal__footer">
+                <button class="usa-button usa-button--secondary">Cancel</button>
+                <button class="usa-button usa-button--danger">Deactivate</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="usa-modal-overlay" role="dialog" aria-modal="true"
+     aria-labelledby="modal-heading"&gt;
+  &lt;div class="usa-modal"&gt;
+
+    &lt;!-- Header: always navy background --&gt;
+    &lt;div class="usa-modal__header"&gt;
+      &lt;h2 id="modal-heading" class="usa-modal__heading"&gt;Confirm Action&lt;/h2&gt;
+      &lt;button class="usa-modal__close" aria-label="Close"&gt;&amp;#x2715;&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class="usa-modal__body"&gt;
+      &lt;p&gt;Are you sure you want to proceed?&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="usa-modal__footer"&gt;
+      &lt;button class="usa-button usa-button--secondary"&gt;Cancel&lt;/button&gt;
+      &lt;button class="usa-button usa-button--danger"&gt;Confirm&lt;/button&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Authenticated App Shell</h3>
+        <p class="lib-subsection__desc">The required structure for every authenticated Treasury application. The <code>.gov</code> banner, skip link, and site header are non-negotiable on every page.</p>
+        <div class="lib-note">
+          <strong>Required assets:</strong> Copy <code>treasury-seal-white-simple.svg</code>, <code>favicon.svg</code>, and the USWDS icon sprite from the TDDS <code>assets/</code> folder into your app's <code>public/</code> directory before building.
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="app-shell"&gt;
+
+  &lt;!-- 1. Skip link — must be first element in body --&gt;
+  &lt;a class="usa-skipnav" href="#main-content"&gt;Skip to main content&lt;/a&gt;
+
+  &lt;!-- 2. .gov banner — required on every authenticated page --&gt;
+  &lt;div class="usa-banner" role="banner"&gt;
+    &lt;div class="usa-banner__header"&gt;
+      &lt;div class="usa-banner__inner"&gt;
+        &lt;img class="usa-banner__header-flag" src="/us_flag_small.png" alt="U.S. flag"&gt;
+        &lt;p class="usa-banner__header-text"&gt;
+          An official website of the United States government
+        &lt;/p&gt;
+        &lt;button class="usa-banner__button" aria-expanded="false"&gt;
+          &lt;span class="usa-banner__button-text"&gt;Here's how you know&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- 3. Site header --&gt;
+  &lt;header class="usa-header"&gt;
+    &lt;a class="usa-header__title" href="/"&gt;
+      &lt;img class="usa-header__seal"
+           src="/treasury-seal-white-simple.svg"
+           width="48" height="48"
+           alt="U.S. Department of the Treasury seal"&gt;
+      &lt;div class="usa-header__branding"&gt;
+        &lt;span class="usa-header__agency"&gt;U.S. Department of the Treasury&lt;/span&gt;
+        &lt;span class="usa-header__app-name"&gt;App Name&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;!-- Right: notification bell + account dropdown --&gt;
+  &lt;/header&gt;
+
+  &lt;!-- 4. Body: sidebar + main --&gt;
+  &lt;div class="app-body"&gt;
+
+    &lt;nav class="usa-sidenav-container"&gt;
+      &lt;ul class="usa-sidenav"&gt;
+        &lt;li&gt;&lt;a href="/dashboard" class="active"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/resources"&gt;Resources&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;main id="main-content" class="usa-main"&gt;
+      &lt;div class="usa-page"&gt;
+        &lt;div class="usa-page-header"&gt;
+          &lt;h1 class="usa-page-title"&gt;Dashboard&lt;/h1&gt;
+        &lt;/div&gt;
+        &lt;!-- page content --&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">USWDS Icons</h3>
+        <p class="lib-subsection__desc">All icons come from the USWDS SVG sprite. Download it once and reference icon names via <code>&lt;use href="/assets/img/sprite.svg#icon-name"&gt;</code>. Never use emoji as icons anywhere in the UI.</p>
+        <div class="lib-code">
+          <pre><code>&lt;!-- One-time setup: download the USWDS sprite --&gt;
+curl -L "https://cdn.jsdelivr.net/npm/@uswds/uswds/packages/uswds-core/src/img/sprite.svg" \
+     -o public/assets/img/sprite.svg
+
+&lt;!-- Usage: inline SVG with sprite reference --&gt;
+&lt;svg class="usa-icon" aria-hidden="true" focusable="false"&gt;
+  &lt;use href="/assets/img/sprite.svg#search"&gt;&lt;/use&gt;
+&lt;/svg&gt;
+
+&lt;!-- Icon-only button: always include sr-only label or aria-label --&gt;
+&lt;button aria-label="Search"&gt;
+  &lt;svg class="usa-icon" aria-hidden="true" focusable="false"&gt;
+    &lt;use href="/assets/img/sprite.svg#search"&gt;&lt;/use&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;!-- Nav / UI icons: use .nav-icon class (18×18px) --&gt;
+&lt;svg class="nav-icon" aria-hidden="true" focusable="false"&gt;
+  &lt;use href="/assets/img/sprite.svg#folder_open"&gt;&lt;/use&gt;
+&lt;/svg&gt;
+
+&lt;!-- Full icon list: https://designsystem.digital.gov/components/icon/ --&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Utility Classes</h3>
+        <p class="lib-subsection__desc">A small set of layout and text utilities defined in <code>tdds.css</code>. Use these for one-off adjustments rather than writing new CSS rules.</p>
+        <div class="lib-demo lib-demo--white" style="padding:var(--space-3)">
+          <table class="token-table" style="width:100%">
+            <thead><tr><th>Class</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td><code>.flex</code></td><td><code>display: flex</code></td></tr>
+              <tr><td><code>.flex-center</code></td><td><code>display: flex; align-items: center</code></td></tr>
+              <tr><td><code>.flex-between</code></td><td><code>display: flex; align-items: center; justify-content: space-between</code></td></tr>
+              <tr><td><code>.flex-end</code></td><td><code>display: flex; align-items: center; justify-content: flex-end</code></td></tr>
+              <tr><td><code>.gap-1 / .gap-2 / .gap-3</code></td><td><code>gap: var(--space-1/2/3)</code></td></tr>
+              <tr><td><code>.mt-1 / .mt-2 / .mt-3 / .mt-4</code></td><td><code>margin-top: var(--space-*)</code></td></tr>
+              <tr><td><code>.mb-2 / .mb-3</code></td><td><code>margin-bottom: var(--space-*)</code></td></tr>
+              <tr><td><code>.text-muted</code></td><td><code>color: var(--usa-base-dark)</code></td></tr>
+              <tr><td><code>.text-sm</code></td><td><code>font-size: 13px</code></td></tr>
+              <tr><td><code>.text-xs</code></td><td><code>font-size: 12px</code></td></tr>
+              <tr><td><code>.font-bold</code></td><td><code>font-weight: 700</code></td></tr>
+              <tr><td><code>.font-mono</code></td><td><code>font-family: var(--font-mono)</code></td></tr>
+              <tr><td><code>.sr-only</code></td><td>Screen-reader only — visually hidden, accessible</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="lib-footer">
+    <p>
+      <strong>Treasury Digital Design System</strong> &nbsp;·&nbsp; Version 1.0 &nbsp;·&nbsp;
+      Built on <a href="https://designsystem.digital.gov" target="_blank" rel="noopener">USWDS</a> conventions &nbsp;·&nbsp;
+      U.S. Department of the Treasury
+    </p>
+    <p style="margin-top:var(--space-1);color:var(--usa-primary-light);font-size:12px">
+      All colors, spacing, and typography values are CSS custom properties in
+      <code style="background:rgba(255,255,255,.1);color:var(--usa-primary-lighter);border:none">tdds.css</code>
+    </p>
+  </footer>
+
+  <script>
+    /* Banner toggle */
+    function toggleBanner(btn) {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      document.getElementById('gov-banner-content').hidden = expanded;
+    }
+
+    /* Copy code block to clipboard */
+    function copyCode(btn) {
+      const code = btn.closest('.lib-code').querySelector('code');
+      navigator.clipboard.writeText(code.textContent).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      }).catch(() => {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      });
+    }
+
+    /* Highlight active nav link on scroll */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.lib-quicknav a');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.lib-quicknav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -80% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
