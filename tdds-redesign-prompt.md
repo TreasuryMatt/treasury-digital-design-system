@@ -42,6 +42,18 @@ STEP 1 — Foundation
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Public+Sans:wght@400;500;600;700;800&family=Roboto+Mono&display=swap" rel="stylesheet">
+• Copy canonical TDDS branding assets from the tdds repo into public/:
+    cp [path-to-tdds]/assets/treasury-seal-white-simple.svg public/
+    cp [path-to-tdds]/assets/favicon.svg public/
+    cp [path-to-tdds]/assets/us_flag_small.png public/
+    cp [path-to-tdds]/assets/icon-dot-gov.svg public/
+    cp [path-to-tdds]/assets/icon-https.svg public/
+• Download the USWDS icon sprite:
+    mkdir -p public/assets/img
+    curl -L "https://cdn.jsdelivr.net/npm/@uswds/uswds/packages/uswds-core/src/img/sprite.svg" \
+      -o public/assets/img/sprite.svg
+• Add favicon to index.html <head>:
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 • Rename any existing src/index.css to src/App.css (keep app-specific styles there).
 • Confirm: does the app build without errors?
 
@@ -60,8 +72,9 @@ STEP 2 — App Shell
     </div>
 • Create GovBanner component: .usa-banner with US flag (inline CSS gradient), text 
   "An official website of the United States government", collapsible "How you know" section.
-• Create SiteHeader component: .usa-header (bg #162e51, 64px), Treasury seal SVG on left, 
-  agency name in serif uppercase + app name in sans 800 weight, user info + logout on right.
+• Create SiteHeader component: .usa-header (bg #162e51, 64px), use public/treasury-seal-white-simple.svg
+  (width=48 height=48 alt="U.S. Department of the Treasury seal") on left, agency name in serif uppercase
+  + app name in sans 800 weight, user info + logout on right.
 • Create Sidebar component: .usa-sidenav-container (240px, white, border-right), nav links 
   using .usa-sidenav a with active left-border pattern.
 • Confirm: shell renders correctly with banner, header, sidebar, and outlet area.
@@ -127,8 +140,13 @@ IMPORTANT RULES (follow strictly throughout all steps)
 • NEVER skip the .gov banner — it is legally required on all .gov sites
 • NEVER use a font other than Public Sans, Merriweather, or Roboto Mono
 • NEVER install @uswds/uswds npm package — tdds.css replaces it
+• NEVER use gradients (linear-gradient, radial-gradient) on backgrounds, cards, panels, or containers — use flat TDDS color tokens only
+• NEVER use emojis as UI icons — use USWDS SVG icons via public/assets/img/sprite.svg instead
+• NEVER use a different Treasury seal or favicon — always copy from the tdds repo assets/ folder
 • ALWAYS use semantic HTML: <button> for actions, <nav> for navigation, <main> for content
 • ALWAYS include focus styles on interactive elements
+• ALWAYS use public/treasury-seal-white-simple.svg for the header logo
+• ALWAYS use public/favicon.svg as the browser tab icon
 ```
 
 ---

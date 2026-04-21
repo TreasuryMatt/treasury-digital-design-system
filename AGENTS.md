@@ -67,3 +67,24 @@ Once all six questions are answered, summarize the engineer's choices and confir
 - `TDDS.md` — Design system documentation and usage guidelines
 - `tdds.css` — Core TDDS stylesheet
 - `tdds-redesign-prompt.md` — Detailed redesign instructions and patterns
+
+---
+
+## Level 3 (Full Conversion) — Mandatory Standards
+
+When the engineer selects **option 3 (full conversion)**, the following are non-negotiable regardless of what the existing app uses:
+
+**Canonical branding assets** (copy from `assets/` in this repo into the target app's `public/`):
+- `treasury-seal-white-simple.svg` — header logo, always 48×48px
+- `favicon.svg` — browser tab icon, always referenced as `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`
+- `us_flag_small.png`, `icon-dot-gov.svg`, `icon-https.svg` — `.gov` banner
+
+**USWDS icons** — Download the sprite during Step 1:
+```bash
+mkdir -p public/assets/img
+curl -L "https://cdn.jsdelivr.net/npm/@uswds/uswds/packages/uswds-core/src/img/sprite.svg" \
+  -o public/assets/img/sprite.svg
+```
+See the full icon list at https://designsystem.digital.gov/components/icon/. Never use emojis as icons.
+
+**No gradients** — Do not use `linear-gradient` or `radial-gradient` on any background, card, panel, or UI element. Use flat TDDS color tokens only.

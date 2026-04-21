@@ -21,6 +21,18 @@ These are non-negotiable. Follow them in every file you generate.
 ### Required Assets
 Every app must include `tdds.css` (or an equivalent `index.css` with all TDDS tokens). Do **not** install the `@uswds/uswds` npm package — use the hand-coded TDDS implementation.
 
+The TDDS repo ships the following canonical assets in its `assets/` directory. Copy all of them into your app's `public/` folder at the start of every Level 3 (full conversion) build:
+
+| File | Use |
+|---|---|
+| `assets/treasury-seal-white-simple.svg` | Header logo — 48×48px, white, left side of `.usa-header` |
+| `assets/favicon.svg` | Browser tab icon — reference in `<link rel="icon">` |
+| `assets/us_flag_small.png` | US flag in `.gov` banner |
+| `assets/icon-dot-gov.svg` | "Official .gov" icon in `.gov` banner disclosure |
+| `assets/icon-https.svg` | "Secure .gov" icon in `.gov` banner disclosure |
+
+Never substitute a different logo, seal, or favicon. These are the canonical Treasury branding assets.
+
 ---
 
 ## 2. Design Tokens
@@ -220,6 +232,8 @@ background: var(--usa-primary-darker)   height: 64px
 Left side: Treasury seal (48×48px SVG) + agency name (serif, 11px, uppercase, primary-light) + app name (sans, 20px, 800 weight, white)
 Right side: notification bell (optional) + user name + role pill + account dropdown
 ```
+
+**Logo:** Always use `public/treasury-seal-white-simple.svg` (copied from `assets/` in this repo). Never use a different seal, a PNG substitute, a placeholder, or an emoji. The `<img>` element must be `width="48" height="48" alt="U.S. Department of the Treasury seal"`.
 
 ### Sidebar (`.usa-sidenav-container`)
 ```
@@ -470,15 +484,17 @@ The login page is **outside** the authenticated shell — no sidebar, no header.
 
 ## 8. Icons
 
-TDDS uses the USWDS icon set. Icons are **not bundled** in this repo — they ship with the `@uswds/uswds` npm package.
+TDDS uses the USWDS icon set exclusively. **Never use emojis as icons** — not in nav, not in empty states, not in buttons, not anywhere in the UI.
 
-**Do not install `@uswds/uswds` as a full dependency.** Copy only the SVG sprite you need:
+**Source:** The full USWDS icon library is at [https://designsystem.digital.gov/components/icon/](https://designsystem.digital.gov/components/icon/). Do not install `@uswds/uswds` as a full dependency. Instead, during setup, download the USWDS sprite and place it at `public/assets/img/sprite.svg`:
 
+```bash
+# One-time setup — download the USWDS sprite
+curl -L "https://cdn.jsdelivr.net/npm/@uswds/uswds/packages/uswds-core/src/img/sprite.svg" \
+  -o public/assets/img/sprite.svg
 ```
-node_modules/@uswds/uswds/packages/uswds-core/src/img/usa-icons/
-```
 
-Each icon is an individual SVG file (e.g. `search.svg`, `close.svg`, `arrow_forward.svg`). Use them inline or reference the sprite.
+This approach is preferred over copying from `node_modules` because it stays current as USWDS adds icons.
 
 **Usage pattern:**
 ```html
@@ -497,7 +513,7 @@ Each icon is an individual SVG file (e.g. `search.svg`, `close.svg`, `arrow_forw
 
 **Sizing:** Use the `.nav-icon` class (18×18px) for nav/UI icons, or set width/height explicitly using spacing tokens.
 
-**Full icon list:** [USWDS icon library](https://designsystem.digital.gov/components/icon/)
+**Full icon list:** [USWDS icon library](https://designsystem.digital.gov/components/icon/) — consult this page to find icon names before using them.
 
 ---
 
@@ -533,6 +549,10 @@ These patterns are **banned** in Treasury apps.
 | Use `outline: none` | Replace with custom `outline: 3px solid var(--usa-primary-vivid)` |
 | Skip the login card `.gov` strip | It must appear on the login page too |
 | Put the Treasury seal or agency name in a different font | Always serif + uppercase for agency, sans-serif for app name |
+| Use a gradient on a background, card, or panel: `background: linear-gradient(...)` | Use flat `var(--usa-*)` color tokens — gradients look vibe-coded and are not TDDS |
+| Use an emoji as a UI icon (🔔 📂 ✕ etc.) | Use USWDS SVG icons via sprite — see Section 8 |
+| Use a different logo or placeholder for the Treasury seal | Always use `public/treasury-seal-white-simple.svg` from the TDDS assets |
+| Use a different favicon | Always use `public/favicon.svg` from the TDDS assets |
 
 ---
 
@@ -587,11 +607,16 @@ Before shipping any new Treasury app, verify:
 
 - [ ] `tdds.css` imported in `main.tsx` / `index.tsx`
 - [ ] Google Fonts preconnect + Public Sans, Merriweather, Roboto Mono loaded in `index.html`
+- [ ] `public/treasury-seal-white-simple.svg` copied from TDDS `assets/` — used in `.usa-header`
+- [ ] `public/favicon.svg` copied from TDDS `assets/` — referenced as `<link rel="icon" href="/favicon.svg">`
+- [ ] `public/assets/img/sprite.svg` downloaded from USWDS CDN — used for all icons
 - [ ] `.usa-banner` present on every authenticated page and on the login page
 - [ ] `.usa-skipnav` is the first element in the page shell
-- [ ] Site header shows Treasury seal, "U.S. Department of the Treasury" in serif uppercase, and app name
+- [ ] Site header shows `treasury-seal-white-simple.svg` logo, "U.S. Department of the Treasury" in serif uppercase, and app name
 - [ ] Sidebar is 240px, white background, `border-right: 1px solid var(--usa-base-lighter)`
 - [ ] All colors come from `var(--usa-*)` tokens — no hardcoded hex in JSX or CSS
+- [ ] No gradients on any background, card, panel, or container
+- [ ] No emojis anywhere in the UI — use USWDS SVG icons via sprite
 - [ ] No Tailwind, styled-components, or CSS Modules
 - [ ] Login page uses `.login-page` / `.login-card` pattern
 - [ ] All interactive elements have focus styles
