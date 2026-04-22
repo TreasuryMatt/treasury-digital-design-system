@@ -15,6 +15,7 @@
        Layered on top of tdds.css; does not override system tokens.
        ════════════════════════════════════════════════════════════════════════ */
 
+    html, body { height: auto; min-height: 100%; }
     body { background: var(--usa-white); }
 
     /* ── Hero ─────────────────────────────────────────────────────────────── */
@@ -114,6 +115,26 @@
       border-bottom-color: var(--usa-primary);
       background: var(--usa-white);
     }
+    .lib-quicknav__totop {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: var(--space-105) var(--space-3);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--usa-base);
+      text-decoration: none;
+      white-space: nowrap;
+      border-right: 1px solid var(--usa-base-lighter);
+      border-bottom: 3px solid transparent;
+      transition: color .12s, background .12s;
+      flex-shrink: 0;
+    }
+    .lib-quicknav__totop:hover {
+      color: var(--usa-primary);
+      background: var(--usa-white);
+    }
+    .lib-quicknav__totop svg { flex-shrink: 0; }
 
     /* ── Main ─────────────────────────────────────────────────────────────── */
     .lib-main {
@@ -483,6 +504,10 @@
   <!-- Sticky section nav -->
   <nav class="lib-quicknav" aria-label="Jump to section">
     <div class="lib-quicknav__inner">
+      <a href="#" class="lib-quicknav__totop" aria-label="Back to top">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 10V2M6 2L2 6M6 2l4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Top
+      </a>
       <a href="#tokens">Design Tokens</a>
       <a href="#typography">Typography</a>
       <a href="#buttons">Buttons</a>
@@ -1246,6 +1271,134 @@ font-family: var(--font-mono);    /* Roboto Mono */</code></pre>
   &lt;div class="stat-card danger"&gt;
     &lt;div class="stat-label"&gt;OVERDUE&lt;/div&gt;
     &lt;div class="stat-value danger"&gt;13&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Mini Stat Cards — <code>.mini-stat-row</code> / <code>.mini-stat-card</code></h3>
+        <p class="lib-subsection__desc">A single horizontal strip for 4–6 glanceable metrics. Cards are divided by vertical rules; an optional left-border accent signals status. Use when you need more items in a row than the standard stat grid allows or want a compact, banner-style summary bar.</p>
+        <div class="lib-demo lib-demo--column">
+          <div class="mini-stat-row" style="width:100%">
+            <div class="mini-stat-card">
+              <div class="stat-label">Total Resources</div>
+              <div class="mini-stat-value">13</div>
+              <div class="mini-stat-sublabel">8 Federal / 5 Contractor</div>
+            </div>
+            <div class="mini-stat-card">
+              <div class="stat-label">Active Projects</div>
+              <div class="mini-stat-value">6</div>
+            </div>
+            <div class="mini-stat-card warn">
+              <div class="stat-label">Avg Utilization</div>
+              <div class="mini-stat-value">62%</div>
+              <div class="mini-stat-sublabel">Underutilized — below 80%</div>
+            </div>
+            <div class="mini-stat-card success">
+              <div class="stat-label">Available Resources</div>
+              <div class="mini-stat-value">12</div>
+              <div class="mini-stat-sublabel">1 over capacity</div>
+            </div>
+            <div class="mini-stat-card">
+              <div class="stat-label">Ending Within 30 Days</div>
+              <div class="mini-stat-value">0</div>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="mini-stat-row"&gt;
+
+  &lt;!-- Default — no accent border --&gt;
+  &lt;div class="mini-stat-card"&gt;
+    &lt;div class="stat-label"&gt;TOTAL RESOURCES&lt;/div&gt;
+    &lt;div class="mini-stat-value"&gt;13&lt;/div&gt;
+    &lt;div class="mini-stat-sublabel"&gt;8 Federal / 5 Contractor&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- No sublabel --&gt;
+  &lt;div class="mini-stat-card"&gt;
+    &lt;div class="stat-label"&gt;ACTIVE PROJECTS&lt;/div&gt;
+    &lt;div class="mini-stat-value"&gt;6&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Warning — gold left accent --&gt;
+  &lt;div class="mini-stat-card warn"&gt;
+    &lt;div class="stat-label"&gt;AVG UTILIZATION&lt;/div&gt;
+    &lt;div class="mini-stat-value"&gt;62%&lt;/div&gt;
+    &lt;div class="mini-stat-sublabel"&gt;Underutilized — below 80%&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Success — green left accent --&gt;
+  &lt;div class="mini-stat-card success"&gt;
+    &lt;div class="stat-label"&gt;AVAILABLE RESOURCES&lt;/div&gt;
+    &lt;div class="mini-stat-value"&gt;12&lt;/div&gt;
+    &lt;div class="mini-stat-sublabel"&gt;1 over capacity&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Danger — red left accent --&gt;
+  &lt;div class="mini-stat-card danger"&gt;
+    &lt;div class="stat-label"&gt;OVERDUE&lt;/div&gt;
+    &lt;div class="mini-stat-value"&gt;3&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Detailed Stat Cards — <code>.detail-stat-grid</code> / <code>.detail-stat-card</code></h3>
+        <p class="lib-subsection__desc">Use below a Mini Stat Row to call out 2–4 actionable focus areas. Each card pairs a metric headline with a brief explanation and a single CTA. The left-border color maps to the same status system as other card types.</p>
+        <div class="lib-demo lib-demo--column">
+          <div class="detail-stat-grid" style="width:100%">
+            <div class="detail-stat-card danger">
+              <div class="stat-label">Suggested Focus</div>
+              <div class="detail-stat-card__heading">1 overloaded resource</div>
+              <div class="detail-stat-card__body">Rebalance assignments for people above 100% before pulling in new work.</div>
+              <div><button class="usa-button usa-button--outline">Review utilization</button></div>
+            </div>
+            <div class="detail-stat-card success">
+              <div class="stat-label">Suggested Focus</div>
+              <div class="detail-stat-card__heading">12 available resources</div>
+              <div class="detail-stat-card__body">Use bench capacity to staff open needs or protect upcoming transitions before they become urgent.</div>
+              <div><button class="usa-button usa-button--outline">View available staff</button></div>
+            </div>
+            <div class="detail-stat-card">
+              <div class="stat-label">Suggested Focus</div>
+              <div class="detail-stat-card__heading">0 ending soon</div>
+              <div class="detail-stat-card__body">Projects nearing completion usually create staffing moves, backfills, or offboarding work. Get ahead of those handoffs here.</div>
+              <div><button class="usa-button usa-button--outline">Plan transitions</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;div class="detail-stat-grid"&gt;
+
+  &lt;!-- Danger — red left accent --&gt;
+  &lt;div class="detail-stat-card danger"&gt;
+    &lt;div class="stat-label"&gt;SUGGESTED FOCUS&lt;/div&gt;
+    &lt;div class="detail-stat-card__heading"&gt;1 overloaded resource&lt;/div&gt;
+    &lt;div class="detail-stat-card__body"&gt;Rebalance assignments for people above 100% before pulling in new work.&lt;/div&gt;
+    &lt;div&gt;&lt;button class="usa-button usa-button--outline"&gt;Review utilization&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Success — green left accent --&gt;
+  &lt;div class="detail-stat-card success"&gt;
+    &lt;div class="stat-label"&gt;SUGGESTED FOCUS&lt;/div&gt;
+    &lt;div class="detail-stat-card__heading"&gt;12 available resources&lt;/div&gt;
+    &lt;div class="detail-stat-card__body"&gt;Use bench capacity to staff open needs or protect upcoming transitions.&lt;/div&gt;
+    &lt;div&gt;&lt;button class="usa-button usa-button--outline"&gt;View available staff&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Default — primary blue left accent --&gt;
+  &lt;div class="detail-stat-card"&gt;
+    &lt;div class="stat-label"&gt;SUGGESTED FOCUS&lt;/div&gt;
+    &lt;div class="detail-stat-card__heading"&gt;0 ending soon&lt;/div&gt;
+    &lt;div class="detail-stat-card__body"&gt;Projects nearing completion create staffing moves, backfills, or offboarding work. Get ahead here.&lt;/div&gt;
+    &lt;div&gt;&lt;button class="usa-button usa-button--outline"&gt;Plan transitions&lt;/button&gt;&lt;/div&gt;
   &lt;/div&gt;
 
 &lt;/div&gt;</code></pre>

@@ -272,6 +272,45 @@ Use for key metrics at the top of dashboard pages.
 - Top border colors: default=primary, `.warn`=warning-dark, `.danger`=error, `.success`=success
 - Stat value: Merriweather 36px 900 weight, color `primary-darker` (or `.warn`/`.danger`/`.success` modifier)
 
+### Mini Stat Cards
+
+A horizontal summary bar for 4–6 compact metrics. Use when you need more items in a row than `.stat-grid` allows, or want a banner-style strip rather than individual cards.
+
+```html
+<div class="mini-stat-row">
+  <div class="mini-stat-card">             <!-- add .warn, .success, or .danger for left accent -->
+    <div class="stat-label">TOTAL RESOURCES</div>
+    <div class="mini-stat-value">13</div>
+    <div class="mini-stat-sublabel">8 Federal / 5 Contractor</div>  <!-- optional -->
+  </div>
+</div>
+```
+
+- All cards in one flex row; vertical rules separate them automatically; no background of their own
+- Left-border accent: `.warn`=warning-dark, `.success`=success, `.danger`=error, default=`base-lighter` (gray)
+- Value: Public Sans 32px 800 weight, `base-darkest`
+- Sublabel: 12px `base-dark`, optional context line below the value
+
+### Detailed Stat Cards
+
+Use below a Mini Stat Row to highlight 2–4 actionable focus areas. Each card pairs a metric headline with a brief explanation and one CTA button.
+
+```html
+<div class="detail-stat-grid">
+  <div class="detail-stat-card danger">    <!-- add .warn, .success, or .danger for left accent -->
+    <div class="stat-label">SUGGESTED FOCUS</div>
+    <div class="detail-stat-card__heading">1 overloaded resource</div>
+    <div class="detail-stat-card__body">Rebalance assignments before pulling in new work.</div>
+    <div><button class="usa-button usa-button--outline">Review utilization</button></div>
+  </div>
+</div>
+```
+
+- Grid: `repeat(auto-fill, minmax(260px, 1fr))`
+- Left-border accent same system as Mini Stat Cards; default=primary blue
+- Heading: Public Sans 26px 700 weight, `base-darkest`
+- Body: 14px `base-dark`; CTA uses `usa-button--outline`
+
 ### Data Tables
 
 ```html
