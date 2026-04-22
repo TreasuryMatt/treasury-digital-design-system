@@ -18,6 +18,19 @@ These are non-negotiable. Follow them in every file you generate.
 - **Class naming: BEM-style with `usa-` prefix** for USWDS components (`usa-button`, `usa-table`, `usa-modal`), plain BEM for app-specific components (`.stat-card`, `.rollup-program__header`).
 - **No inline `style=` props** in JSX except for truly dynamic values (e.g. a color computed at runtime from data). Static styles always go in CSS.
 
+### USWDS as the upstream fallback
+
+TDDS is a Treasury-flavored layer on top of [USWDS](https://designsystem.digital.gov/components/). It defines overrides, extensions, and Treasury-specific patterns — it does not replicate every USWDS component.
+
+**When a component, atom, pattern, or style is needed that is not defined in TDDS, look to USWDS before building anything custom.** Apply TDDS color, spacing, and typography tokens to the USWDS markup.
+
+Decision order for any AI agent working in a Treasury app:
+1. **Defined in TDDS** → use it, no question needed.
+2. **Not in TDDS, exists in USWDS** → offer it: *"TDDS doesn't define a [thing]. USWDS has one — want me to pull it in with TDDS tokens, or use it as-is?"*
+3. **Not in TDDS, not in USWDS** → build custom and say so: *"Neither TDDS nor USWDS defines a [thing] — I'll build one to match TDDS conventions."*
+
+Do **not** `npm install @uswds/uswds`. USWDS HTML/CSS patterns can be referenced and copied directly — it's the npm package that's banned, not the markup.
+
 ### Required Assets
 Every app must include `tdds.css` (or an equivalent `index.css` with all TDDS tokens). Do **not** install the `@uswds/uswds` npm package — use the hand-coded TDDS implementation.
 
@@ -240,8 +253,50 @@ Right side: notification bell (optional) + user name + role pill + account dropd
 width: 240px   background: white   border-right: 1px solid base-lighter
 ```
 - Navigation links use `.usa-sidenav a` — 14.5px, 4px left border (transparent → primary on active/hover)
-- Group nav items under `.sidenav-section` with `.sidenav-section-label` (11px, uppercase, gray)
-- Active link: `background: primary-lighter`, `border-left-color: primary`, `font-weight: 700`
+- Mark the active link with `class="usa-current"` on the `<a>` element (USWDS canonical)
+- Group nav items under `.sidenav-section` with optional `.sidenav-section-label` (11px, uppercase, gray)
+- Sub-navigation: nest `<ul class="usa-sidenav__sublist">` inside a `.usa-sidenav__item`; supports up to 3 levels
+
+**Basic sidebar:**
+```html
+<nav class="usa-sidenav-container" aria-label="Primary navigation">
+  <div class="sidenav-section">
+    <ul class="usa-sidenav">
+      <li class="usa-sidenav__item">
+        <a href="/dashboard" class="usa-current">Dashboard</a>
+      </li>
+      <li class="usa-sidenav__item"><a href="/projects">Projects</a></li>
+      <li class="usa-sidenav__item"><a href="/reports">Reports</a></li>
+    </ul>
+  </div>
+</nav>
+```
+
+**Grouped sections with sub-navigation:**
+```html
+<nav class="usa-sidenav-container" aria-label="Primary navigation">
+  <div class="sidenav-section">
+    <p class="sidenav-section-label">Overview</p>
+    <ul class="usa-sidenav">
+      <li class="usa-sidenav__item">
+        <a href="/projects" class="usa-current">Projects</a>
+        <ul class="usa-sidenav__sublist">
+          <li class="usa-sidenav__item"><a href="/projects/active">Active</a></li>
+          <li class="usa-sidenav__item">
+            <a href="/projects/archived" class="usa-current">Archived</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="sidenav-section">
+    <p class="sidenav-section-label">System</p>
+    <ul class="usa-sidenav">
+      <li class="usa-sidenav__item"><a href="/settings">Settings</a></li>
+    </ul>
+  </div>
+</nav>
+```
 
 ### Page Header (`.usa-page-header`)
 ```css

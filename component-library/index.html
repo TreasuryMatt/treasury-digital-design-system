@@ -79,67 +79,70 @@
       max-width: 680px;
     }
 
-    /* ── Quick nav ────────────────────────────────────────────────────────── */
-    .lib-quicknav {
-      background: var(--usa-base-lightest);
-      border-bottom: 1px solid var(--usa-base-lighter);
+    /* ── Body layout (sidebar + content) ────────────────────────────────── */
+    .lib-body {
+      display: flex;
+      align-items: flex-start;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* ── Sidebar ──────────────────────────────────────────────────────────── */
+    .lib-sidebar {
+      width: 220px;
+      flex-shrink: 0;
       position: sticky;
       top: 0;
-      z-index: 100;
-    }
-    .lib-quicknav__inner {
-      max-width: 1100px;
-      margin: 0 auto;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--usa-white);
+      border-right: 1px solid var(--usa-base-lighter);
       display: flex;
-      align-items: center;
-      overflow-x: auto;
+      flex-direction: column;
+      padding-top: var(--space-4);
     }
-    .lib-quicknav a {
-      display: block;
-      padding: var(--space-105) var(--space-3);
+    .lib-sidebar__label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--usa-base);
+      padding: 0 var(--space-3) var(--space-1);
+      margin: 0;
+    }
+    /* Override usa-sidenav styles for the library sidebar context */
+    .lib-sidebar .usa-sidenav {
+      flex: 1;
+    }
+    .lib-sidebar .usa-sidenav a {
       font-size: 14px;
-      font-weight: 600;
-      color: var(--usa-base-darker);
-      text-decoration: none;
-      border-bottom: 3px solid transparent;
-      white-space: nowrap;
-      transition: color .12s, border-color .12s, background .12s;
+      font-weight: 500;
     }
-    .lib-quicknav a:hover {
-      color: var(--usa-primary);
-      border-bottom-color: var(--usa-primary-light);
-      background: var(--usa-white);
-    }
-    .lib-quicknav a.active {
-      color: var(--usa-primary);
-      border-bottom-color: var(--usa-primary);
-      background: var(--usa-white);
-    }
-    .lib-quicknav__totop {
+    .lib-sidebar__footer {
+      border-top: 1px solid var(--usa-base-lighter);
+      padding: var(--space-2) var(--space-3);
       display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: var(--space-105) var(--space-3);
-      font-size: 13px;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .lib-sidebar__totop {
+      font-size: 12px;
       font-weight: 600;
       color: var(--usa-base);
       text-decoration: none;
-      white-space: nowrap;
-      border-right: 1px solid var(--usa-base-lighter);
-      border-bottom: 3px solid transparent;
-      transition: color .12s, background .12s;
-      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: var(--space-05) 0;
+      transition: color .12s;
     }
-    .lib-quicknav__totop:hover {
-      color: var(--usa-primary);
-      background: var(--usa-white);
-    }
-    .lib-quicknav__totop svg { flex-shrink: 0; }
+    .lib-sidebar__totop:hover { color: var(--usa-primary); }
+    .lib-sidebar__totop svg { flex-shrink: 0; }
 
     /* ── Main ─────────────────────────────────────────────────────────────── */
     .lib-main {
-      max-width: 1100px;
-      margin: 0 auto;
+      flex: 1;
+      min-width: 0;
       padding: var(--space-6) var(--space-5);
     }
 
@@ -436,6 +439,9 @@
     .lib-note strong { color: var(--usa-primary-darker); }
 
     /* ── Responsive ───────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .lib-sidebar { display: none; }
+    }
     @media (max-width: 768px) {
       .lib-hero { padding: var(--space-4) var(--space-3) var(--space-3); }
       .lib-hero__title { font-size: 28px; }
@@ -444,6 +450,170 @@
       .token-color-row { gap: var(--space-1); }
       .token-swatch { width: 110px; }
     }
+
+    /* ── usa-theme-toggle component (copy-ready, from Dark Mode section) ─── */
+    .usa-theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--usa-base-darker);
+      background: var(--usa-base-lightest);
+      border: 1px solid var(--usa-base-lighter);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background .12s, color .12s, border-color .12s;
+    }
+    .usa-theme-toggle:hover {
+      background: var(--usa-primary-lighter);
+      border-color: var(--usa-primary-light);
+      color: var(--usa-primary-dark);
+    }
+    .usa-theme-toggle__icon { flex-shrink: 0; }
+    .usa-theme-toggle__icon--sun  { display: none; }
+    .usa-theme-toggle__icon--moon { display: block; }
+    [data-theme="dark"] .usa-theme-toggle__icon--sun  { display: block; }
+    [data-theme="dark"] .usa-theme-toggle__icon--moon { display: none; }
+
+    /* ── Dark mode toggle button ──────────────────────────────────────────── */
+    .lib-theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px var(--space-1);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--usa-base);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color .12s;
+    }
+    .lib-theme-toggle:hover { color: var(--usa-primary); }
+    .lib-theme-icon { flex-shrink: 0; }
+    .lib-theme-icon--sun  { display: none; }
+    .lib-theme-icon--moon { display: block; }
+    [data-theme="dark"] .lib-theme-icon--sun  { display: block; }
+    [data-theme="dark"] .lib-theme-icon--moon { display: none; }
+
+    /* ════════════════════════════════════════════════════════════════════════
+       DARK MODE TOKEN OVERRIDES
+       Applied when <html data-theme="dark">. All --usa-* tokens are
+       redefined here; every component that reads them auto-adapts.
+       ════════════════════════════════════════════════════════════════════════ */
+    [data-theme="dark"] {
+      /* Neutrals — inverted scale */
+      --usa-white:              #0f2035;
+      --usa-base-lightest:      #09182a;
+      --usa-base-lighter:       rgba(255,255,255,.11);
+      --usa-base-light:         #516e89;
+      --usa-base:               #7fa0bc;
+      --usa-base-dark:          #a8c4d8;
+      --usa-base-darker:        #c8dce9;
+      --usa-base-darkest:       #e5eff6;
+      --usa-ink:                #e5eff6;
+
+      /* Gov banner */
+      --gov-banner-bg:          #07111e;
+      --gov-banner-text:        #a8c4d8;
+
+      /* Primary — shift lighter for dark-bg legibility */
+      --usa-primary-lighter:    rgba(115,179,231,.16);
+      --usa-primary-light:      #73b3e7;
+      --usa-primary:            #73b3e7;
+      --usa-primary-vivid:      #5ba4e5;
+      --usa-primary-dark:       #96caf5;
+      /* --usa-primary-darker stays #162e51 — used for header/footer chrome */
+
+      /* Status — muted translucent backgrounds */
+      --usa-success-lighter:    rgba(0,169,28,.18);
+      --usa-warning-lighter:    rgba(255,190,46,.14);
+      --usa-error-lighter:      rgba(213,67,9,.18);
+      --usa-accent-cool-lighter: rgba(0,189,227,.14);
+
+      /* Shadows — heavier on dark backgrounds */
+      --shadow-1: 0 1px 4px 0 rgba(0,0,0,.35);
+      --shadow-2: 0 4px 12px 0 rgba(0,0,0,.45);
+      --shadow-3: 0 8px 24px 0 rgba(0,0,0,.55);
+    }
+
+    /* ── Library-specific dark mode overrides ────────────────────────────── */
+    /* Elements that reference --usa-primary-darker as text/border don't
+       auto-flip since that token intentionally stays dark for chrome. */
+
+    [data-theme="dark"] body { background: var(--usa-base-lightest); }
+
+    /* Elevate demo areas above the page background */
+    [data-theme="dark"] .lib-demo         { background: var(--usa-white); }
+    [data-theme="dark"] .lib-demo--white  { background: var(--usa-base-lightest); }
+
+    /* Sidebar in dark mode */
+    [data-theme="dark"] .lib-sidebar { background: var(--usa-white); }
+    [data-theme="dark"] .lib-sidebar__label { color: var(--usa-base-dark); }
+    [data-theme="dark"] .lib-sidebar__totop { color: var(--usa-base-dark); }
+    [data-theme="dark"] .lib-theme-toggle { color: var(--usa-base-dark); }
+
+    /* Section/subsection titles use --usa-primary-darker (hardcoded navy) */
+    [data-theme="dark"] .lib-hero__title      { color: var(--usa-primary-light); }
+    [data-theme="dark"] .lib-hero__agency     { color: var(--usa-primary-light); }
+    [data-theme="dark"] .lib-section__title   { color: var(--usa-primary-light); }
+    [data-theme="dark"] .lib-section__header  { border-bottom-color: var(--usa-primary); }
+    [data-theme="dark"] .lib-subsection__title { color: var(--usa-base-darkest); }
+    [data-theme="dark"] .lib-subsection__title::before { background: var(--usa-primary); }
+
+    /* Font cards use --usa-primary-darker as text */
+    [data-theme="dark"] .font-card__name  { color: var(--usa-primary-light); }
+    [data-theme="dark"] .font-card__token { color: var(--usa-primary-dark); }
+
+    /* lib-note uses primary-lighter bg + primary-darker text */
+    [data-theme="dark"] .lib-note        { color: var(--usa-primary-dark); }
+    [data-theme="dark"] .lib-note strong { color: var(--usa-base-darkest); }
+
+    /* Code blocks: slightly elevate above the dark page */
+    [data-theme="dark"] .lib-code pre {
+      background: #1a3655;
+      color: #c8dce9;
+    }
+
+    /* Token table row dividers */
+    [data-theme="dark"] .token-table td { border-bottom-color: var(--usa-base-lighter); }
+
+    /* ── Dark mode: fixed-dark chrome — bg stays --usa-primary-darker but text
+       tokens flipped to dark, so text must be set explicitly to stay light ── */
+
+    /* Data table header */
+    [data-theme="dark"] .usa-table th { color: var(--usa-base-darker); }
+
+    /* Modal header */
+    [data-theme="dark"] .usa-modal__heading           { color: #e5eff6; }
+    [data-theme="dark"] .usa-modal__close             { color: rgba(229,239,246,.75); }
+    [data-theme="dark"] .usa-modal__close:hover       { color: #e5eff6; }
+
+    /* Lib footer */
+    [data-theme="dark"] .lib-footer         { color: var(--usa-primary-light); }
+    [data-theme="dark"] .lib-footer strong  { color: #e5eff6; }
+    [data-theme="dark"] .lib-footer a       { color: var(--usa-primary-light); }
+    [data-theme="dark"] .lib-footer a:hover { color: #e5eff6; }
+    /* inline code in footer has hardcoded color via style attr — override with !important */
+    [data-theme="dark"] .lib-footer code    { color: var(--usa-primary-light) !important; }
+
+    /* ── Dark mode: components that use --usa-primary-darker as text color ── */
+
+    /* Default stat value (primary blue) — lighten; colored variants stay vivid */
+    [data-theme="dark"] .stat-value                { color: var(--usa-primary-light); }
+    [data-theme="dark"] .stat-value.warn           { color: var(--usa-warning); }
+    [data-theme="dark"] .stat-value.danger         { color: var(--usa-error); }
+    [data-theme="dark"] .stat-value.success        { color: var(--usa-success); }
+    [data-theme="dark"] .usa-page-title            { color: var(--usa-primary-light); }
+    [data-theme="dark"] .section-title             { color: var(--usa-primary-light); }
+
+    /* ── Dark mode: copy button — --usa-primary-lighter is now near-transparent */
+    [data-theme="dark"] .lib-copy-btn { color: var(--usa-base-dark); }
   </style>
 </head>
 <body>
@@ -501,24 +671,41 @@
     </div>
   </header>
 
-  <!-- Sticky section nav -->
-  <nav class="lib-quicknav" aria-label="Jump to section">
-    <div class="lib-quicknav__inner">
-      <a href="#" class="lib-quicknav__totop" aria-label="Back to top">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 10V2M6 2L2 6M6 2l4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Top
-      </a>
-      <a href="#tokens">Design Tokens</a>
-      <a href="#typography">Typography</a>
-      <a href="#buttons">Buttons</a>
-      <a href="#forms">Form Controls</a>
-      <a href="#data">Data Display</a>
-      <a href="#feedback">Feedback &amp; Alerts</a>
-      <a href="#layout">Layout &amp; Shell</a>
-    </div>
-  </nav>
+  <div class="lib-body">
 
-  <main id="main-content" class="lib-main">
+    <!-- Left sidebar nav (USWDS side-navigation pattern) -->
+    <nav class="lib-sidebar" aria-label="Jump to section">
+      <p class="lib-sidebar__label">Contents</p>
+      <ul class="usa-sidenav">
+        <li class="usa-sidenav__item"><a href="#tokens">Design Tokens</a></li>
+        <li class="usa-sidenav__item"><a href="#typography">Typography</a></li>
+        <li class="usa-sidenav__item"><a href="#buttons">Buttons</a></li>
+        <li class="usa-sidenav__item"><a href="#forms">Form Controls</a></li>
+        <li class="usa-sidenav__item"><a href="#data">Data Display</a></li>
+        <li class="usa-sidenav__item"><a href="#feedback">Feedback &amp; Alerts</a></li>
+        <li class="usa-sidenav__item"><a href="#layout">Layout &amp; Shell</a></li>
+        <li class="usa-sidenav__item"><a href="#sidebar-nav">Sidebar Navigation</a></li>
+        <li class="usa-sidenav__item"><a href="#darkmode">Dark Mode</a></li>
+      </ul>
+      <div class="lib-sidebar__footer">
+        <button class="lib-theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle color theme">
+          <svg class="lib-theme-icon lib-theme-icon--moon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="lib-theme-icon lib-theme-icon--sun" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span id="themeLabel">Dark mode</span>
+        </button>
+        <a href="#" class="lib-sidebar__totop" aria-label="Back to top">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 10V2M6 2L2 6M6 2l4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to top
+        </a>
+      </div>
+    </nav>
+
+    <main id="main-content" class="lib-main">
 
     <!-- ══════════════════════════════════════════════════════════════════════
          DESIGN TOKENS
@@ -1850,7 +2037,279 @@ curl -L "https://cdn.jsdelivr.net/npm/@uswds/uswds/packages/uswds-core/src/img/s
       </div>
     </section>
 
+    <!-- ══════════════════════════════════════════════════════════════════════
+         SIDEBAR NAVIGATION
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section id="sidebar-nav" class="lib-section">
+      <div class="lib-section__header">
+        <h2 class="lib-section__title">Sidebar Navigation</h2>
+        <p class="lib-section__desc">The USWDS side navigation pattern for authenticated app shells. A sticky left rail (240px) organizes primary navigation into labeled groups. The left-border indicator marks the active link — <code>usa-current</code> on the active <code>&lt;a&gt;</code>.</p>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Basic Sidebar — <code>.usa-sidenav</code></h3>
+        <p class="lib-subsection__desc">Wrap the list in <code>.usa-sidenav-container</code> and use <code>.usa-sidenav__item</code> on each <code>&lt;li&gt;</code>. Add <code>usa-current</code> to the active <code>&lt;a&gt;</code>.</p>
+        <div class="lib-demo lib-demo--white" style="padding:0;min-height:260px;align-items:stretch">
+          <div class="usa-sidenav-container" style="position:static;height:auto;border-right:none;width:220px">
+            <div class="sidenav-section">
+              <ul class="usa-sidenav">
+                <li class="usa-sidenav__item"><a href="#" class="usa-current">Dashboard</a></li>
+                <li class="usa-sidenav__item"><a href="#">Projects</a></li>
+                <li class="usa-sidenav__item"><a href="#">Reports</a></li>
+                <li class="usa-sidenav__item"><a href="#">Users</a></li>
+                <li class="usa-sidenav__item"><a href="#">Settings</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;nav class="usa-sidenav-container" aria-label="Primary navigation"&gt;
+  &lt;div class="sidenav-section"&gt;
+    &lt;ul class="usa-sidenav"&gt;
+      &lt;li class="usa-sidenav__item"&gt;
+        &lt;a href="/dashboard" class="usa-current"&gt;Dashboard&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/reports"&gt;Reports&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/users"&gt;Users&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/settings"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Grouped Sections — <code>.sidenav-section-label</code></h3>
+        <p class="lib-subsection__desc">Use <code>.sidenav-section</code> dividers to group related links. Each section can have an optional <code>.sidenav-section-label</code> heading (11px, uppercase, gray).</p>
+        <div class="lib-demo lib-demo--white" style="padding:0;min-height:320px;align-items:stretch">
+          <div class="usa-sidenav-container" style="position:static;height:auto;border-right:none;width:220px">
+            <div class="sidenav-section">
+              <p class="sidenav-section-label">Overview</p>
+              <ul class="usa-sidenav">
+                <li class="usa-sidenav__item"><a href="#" class="usa-current">Dashboard</a></li>
+                <li class="usa-sidenav__item"><a href="#">Reports</a></li>
+              </ul>
+            </div>
+            <div class="sidenav-section">
+              <p class="sidenav-section-label">Management</p>
+              <ul class="usa-sidenav">
+                <li class="usa-sidenav__item"><a href="#">Projects</a></li>
+                <li class="usa-sidenav__item"><a href="#">Users</a></li>
+                <li class="usa-sidenav__item"><a href="#">Approvals</a></li>
+              </ul>
+            </div>
+            <div class="sidenav-section">
+              <p class="sidenav-section-label">System</p>
+              <ul class="usa-sidenav">
+                <li class="usa-sidenav__item"><a href="#">Settings</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;nav class="usa-sidenav-container" aria-label="Primary navigation"&gt;
+
+  &lt;div class="sidenav-section"&gt;
+    &lt;p class="sidenav-section-label"&gt;Overview&lt;/p&gt;
+    &lt;ul class="usa-sidenav"&gt;
+      &lt;li class="usa-sidenav__item"&gt;
+        &lt;a href="/dashboard" class="usa-current"&gt;Dashboard&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/reports"&gt;Reports&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+
+  &lt;div class="sidenav-section"&gt;
+    &lt;p class="sidenav-section-label"&gt;Management&lt;/p&gt;
+    &lt;ul class="usa-sidenav"&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/users"&gt;Users&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/approvals"&gt;Approvals&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+
+&lt;/nav&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Child navigation — <code>.usa-sidenav__sublist</code></h3>
+        <p class="lib-subsection__desc">Nest a <code>.usa-sidenav__sublist</code> inside a <code>.usa-sidenav__item</code> to show sub-links for the active section. Supports up to three levels per USWDS spec.</p>
+        <div class="lib-demo lib-demo--white" style="padding:0;min-height:280px;align-items:stretch">
+          <div class="usa-sidenav-container" style="position:static;height:auto;border-right:none;width:220px">
+            <div class="sidenav-section">
+              <ul class="usa-sidenav">
+                <li class="usa-sidenav__item"><a href="#">Dashboard</a></li>
+                <li class="usa-sidenav__item">
+                  <a href="#" class="usa-current">Projects</a>
+                  <ul class="usa-sidenav__sublist">
+                    <li class="usa-sidenav__item"><a href="#">Active</a></li>
+                    <li class="usa-sidenav__item"><a href="#" class="usa-current">Archived</a></li>
+                    <li class="usa-sidenav__item"><a href="#">Pending</a></li>
+                  </ul>
+                </li>
+                <li class="usa-sidenav__item"><a href="#">Reports</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;ul class="usa-sidenav"&gt;
+  &lt;li class="usa-sidenav__item"&gt;&lt;a href="/dashboard"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+
+  &lt;li class="usa-sidenav__item"&gt;
+    &lt;a href="/projects" class="usa-current"&gt;Projects&lt;/a&gt;
+
+    &lt;!-- Sub-navigation — shown when parent is active --&gt;
+    &lt;ul class="usa-sidenav__sublist"&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/projects/active"&gt;Active&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="usa-sidenav__item"&gt;
+        &lt;a href="/projects/archived" class="usa-current"&gt;Archived&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class="usa-sidenav__item"&gt;&lt;a href="/projects/pending"&gt;Pending&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+
+  &lt;li class="usa-sidenav__item"&gt;&lt;a href="/reports"&gt;Reports&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         DARK MODE
+         ══════════════════════════════════════════════════════════════════════ -->
+    <section id="darkmode" class="lib-section">
+      <div class="lib-section__header">
+        <h2 class="lib-section__title">Dark Mode</h2>
+        <p class="lib-section__desc">TDDS dark mode is implemented entirely via CSS custom property overrides on <code>[data-theme="dark"]</code>. Since every component reads <code>var(--usa-*)</code> tokens, toggling the attribute on <code>&lt;html&gt;</code> propagates to the entire app with no per-component changes. Use the toggle in the sidebar to preview.</p>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Theme Toggle Button</h3>
+        <p class="lib-subsection__desc">Drop this button into your site header or toolbar. It toggles <code>data-theme="dark"</code> on <code>&lt;html&gt;</code> and persists the choice to <code>localStorage</code>. On first load it respects the OS preference via <code>prefers-color-scheme</code>.</p>
+        <div class="lib-demo lib-demo--white" style="padding:var(--space-4);gap:var(--space-3);flex-direction:column">
+          <p style="font-size:13px;color:var(--usa-base-dark);margin:0">Live demo — this is the actual toggle powering this page:</p>
+          <button class="usa-theme-toggle" onclick="toggleTheme()" aria-label="Toggle color theme" style="align-self:flex-start">
+            <svg class="usa-theme-toggle__icon usa-theme-toggle__icon--moon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="usa-theme-toggle__icon usa-theme-toggle__icon--sun" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="usa-theme-toggle__label">Dark</span>
+          </button>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;!-- HTML --&gt;
+&lt;button class="usa-theme-toggle" onclick="toggleTheme()" aria-label="Toggle color theme"&gt;
+  &lt;svg class="usa-theme-toggle__icon usa-theme-toggle__icon--moon" width="15" height="15"
+       viewBox="0 0 24 24" fill="none" aria-hidden="true"&gt;
+    &lt;path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  &lt;svg class="usa-theme-toggle__icon usa-theme-toggle__icon--sun" width="15" height="15"
+       viewBox="0 0 24 24" fill="none" aria-hidden="true"&gt;
+    &lt;circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/&gt;
+    &lt;path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2
+             M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round"/&gt;
+  &lt;/svg&gt;
+  &lt;span class="usa-theme-toggle__label"&gt;Dark&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="lib-code" style="margin-top:var(--space-2)">
+          <pre><code>/* CSS — add to tdds.css or a global stylesheet */
+.usa-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--usa-base-darker);
+  background: var(--usa-base-lightest);
+  border: 1px solid var(--usa-base-lighter);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s;
+}
+.usa-theme-toggle:hover {
+  background: var(--usa-primary-lighter);
+  border-color: var(--usa-primary-light);
+  color: var(--usa-primary-dark);
+}
+.usa-theme-toggle__icon { flex-shrink: 0; }
+.usa-theme-toggle__icon--sun  { display: none; }
+.usa-theme-toggle__icon--moon { display: block; }
+[data-theme="dark"] .usa-theme-toggle__icon--sun  { display: block; }
+[data-theme="dark"] .usa-theme-toggle__icon--moon { display: none; }</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="lib-code" style="margin-top:var(--space-2)">
+          <pre><code>/* JavaScript */
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('tdds-theme', next);
+  document.querySelectorAll('.usa-theme-toggle__label')
+    .forEach(el =&gt; { el.textContent = isDark ? 'Dark' : 'Light'; });
+}
+
+/* On page load — respect localStorage, then OS preference */
+(function () {
+  const saved = localStorage.getItem('tdds-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.querySelectorAll('.usa-theme-toggle__label')
+      .forEach(el =&gt; { el.textContent = 'Light'; });
+  }
+})();</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Dark Mode Token Reference</h3>
+        <p class="lib-subsection__desc">These overrides live in a <code>[data-theme="dark"]</code> block and remap every neutral and primary token. Status and accent colors are intentionally preserved — only their lighter/tinted variants are adjusted for dark-surface contrast.</p>
+        <div class="lib-demo lib-demo--white" style="padding:var(--space-3)">
+          <table class="token-table" style="width:100%">
+            <thead><tr><th>Token</th><th>Light value</th><th>Dark override</th></tr></thead>
+            <tbody>
+              <tr><td><code>--usa-white</code></td><td>#ffffff</td><td>#0f2035</td></tr>
+              <tr><td><code>--usa-base-lightest</code></td><td>#f0f0f0</td><td>#09182a</td></tr>
+              <tr><td><code>--usa-base-lighter</code></td><td>#dfe1e2</td><td>rgba(255,255,255,.11)</td></tr>
+              <tr><td><code>--usa-base-light</code></td><td>#a9aeb1</td><td>#516e89</td></tr>
+              <tr><td><code>--usa-base</code></td><td>#71767a</td><td>#7fa0bc</td></tr>
+              <tr><td><code>--usa-base-dark</code></td><td>#565c65</td><td>#a8c4d8</td></tr>
+              <tr><td><code>--usa-base-darker</code></td><td>#3d4551</td><td>#c8dce9</td></tr>
+              <tr><td><code>--usa-base-darkest</code></td><td>#1b1b1b</td><td>#e5eff6</td></tr>
+              <tr><td><code>--usa-ink</code></td><td>#1b1b1b</td><td>#e5eff6</td></tr>
+              <tr><td><code>--usa-primary</code></td><td>#005ea2</td><td>#73b3e7</td></tr>
+              <tr><td><code>--usa-primary-light</code></td><td>#73b3e7</td><td>#73b3e7</td></tr>
+              <tr><td><code>--usa-primary-dark</code></td><td>#1a4480</td><td>#96caf5</td></tr>
+              <tr><td><code>--usa-primary-darker</code></td><td>#162e51</td><td><em>unchanged — header/footer chrome</em></td></tr>
+              <tr><td><code>--usa-primary-lighter</code></td><td>#d9e8f6</td><td>rgba(115,179,231,.16)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
   </main>
+
+  </div><!-- /lib-body -->
 
   <footer class="lib-footer">
     <p>
@@ -1865,6 +2324,28 @@ curl -L "https://cdn.jsdelivr.net/npm/@uswds/uswds/packages/uswds-core/src/img/s
   </footer>
 
   <script>
+    /* Theme toggle — applies data-theme="dark" to <html>, persists to localStorage */
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const next = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('tdds-theme', next);
+      document.querySelectorAll('#themeLabel, .usa-theme-toggle__label')
+        .forEach(el => { el.textContent = isDark ? 'Dark' : 'Light'; });
+    }
+
+    /* On load — respect saved preference, then OS preference */
+    (function () {
+      const saved = localStorage.getItem('tdds-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.querySelectorAll('#themeLabel, .usa-theme-toggle__label')
+          .forEach(el => { el.textContent = 'Light'; });
+      }
+    })();
+
     /* Banner toggle */
     function toggleBanner(btn) {
       const expanded = btn.getAttribute('aria-expanded') === 'true';
@@ -1888,18 +2369,18 @@ curl -L "https://cdn.jsdelivr.net/npm/@uswds/uswds/packages/uswds-core/src/img/s
       });
     }
 
-    /* Highlight active nav link on scroll */
+    /* Highlight active sidebar link on scroll */
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.lib-quicknav a');
+    const navLinks = document.querySelectorAll('.lib-sidebar .usa-sidenav a');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          navLinks.forEach(l => l.classList.remove('active'));
-          const active = document.querySelector(`.lib-quicknav a[href="#${entry.target.id}"]`);
-          if (active) active.classList.add('active');
+          navLinks.forEach(l => l.classList.remove('usa-current'));
+          const active = document.querySelector(`.lib-sidebar a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('usa-current');
         }
       });
-    }, { rootMargin: '-15% 0px -80% 0px' });
+    }, { rootMargin: '-10% 0px -80% 0px' });
     sections.forEach(s => observer.observe(s));
   </script>
 

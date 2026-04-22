@@ -18,6 +18,26 @@ There is no build step. Files are authored directly. To preview:
 - Open `component-library/index.html` in a browser
 - Use `npm start` (PORT=3001) if a local server is needed
 
+## USWDS as the upstream fallback
+
+TDDS is a Treasury-flavored layer on top of USWDS — it defines overrides, extensions, and Treasury-specific patterns. It is intentionally scoped and does not replicate every USWDS component.
+
+**Rule:** When a component, pattern, atom, or style is needed and is not defined in TDDS (`tdds.css`, `TDDS.md`, or `component-library/index.html`), look to USWDS next before inventing anything custom.
+
+**How to prompt the user:**
+> "TDDS doesn't define a [thing]. USWDS has one at designsystem.digital.gov/components/[thing] — want me to pull it in and apply TDDS tokens, or use it as-is?"
+
+**Decision logic:**
+1. Defined in TDDS → use TDDS, no question needed.
+2. Not in TDDS, exists in USWDS → offer the USWDS version (apply TDDS tokens) as the default. Only ask if there's a real reason to deviate.
+3. Not in TDDS, not in USWDS → only then consider building custom. Say so explicitly: "Neither TDDS nor USWDS defines a [thing] — I'll build one to match TDDS conventions."
+
+**"Make it myself" is a last resort**, not a first option. Hand-rolled components skip USWDS's 508 accessibility guarantees and keyboard/ARIA patterns.
+
+**Package rule:** Never `npm install @uswds/uswds`. USWDS component HTML and CSS patterns can always be referenced and copied directly — it's the npm dependency that's banned, not the markup.
+
+**Reference:** https://designsystem.digital.gov/components/
+
 ## Architecture and conventions
 
 **CSS rules (non-negotiable):**
@@ -93,6 +113,12 @@ Free response. If none, say "none."
 Once all six questions are answered, summarize the engineer's choices and confirm before making any changes. Then use `TDDS.md`, `tdds.css`, and `tdds-redesign-prompt.md` to guide implementation.
 
 For **Level 3**, follow the 7-step process in `tdds-redesign-prompt.md` exactly. Key steps: remove existing CSS frameworks, import `tdds.css`, add Google Fonts (Public Sans, Merriweather, Roboto Mono), copy branding assets, build the app shell with GovBanner + SiteHeader + Sidebar.
+
+## File sync rule
+
+`AGENTS.md` and the **AI agent workflow** section of this file (`CLAUDE.md`) contain the same 6-question intake script. They must stay identical.
+
+**Rule:** Any time either file is edited — intake questions, answer options, parenthetical notes, or level descriptions — immediately apply the same change to the other file. Never let them drift.
 
 ## Reference apps (screenshots in `screenshots/`)
 

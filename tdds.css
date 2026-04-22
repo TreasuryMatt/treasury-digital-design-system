@@ -476,6 +476,7 @@ code {
   padding: 0 var(--space-3) var(--space-05);
 }
 .usa-sidenav { list-style: none; margin: 0; padding: 0; }
+.usa-sidenav__item { list-style: none; }
 .usa-sidenav a,
 .usa-sidenav button.nav-btn {
   display: flex;
@@ -502,11 +503,24 @@ code {
   color: var(--usa-primary-dark);
   border-left-color: var(--usa-primary-light);
 }
+/* usa-current is the USWDS canonical active class; .active kept for back-compat */
+.usa-sidenav a.usa-current,
 .usa-sidenav a.active {
   background: var(--usa-primary-lighter);
   color: var(--usa-primary-dark);
   border-left-color: var(--usa-primary);
   font-weight: 700;
+}
+/* Sub-navigation (up to 3 levels per USWDS spec) */
+.usa-sidenav__sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.usa-sidenav__sublist a {
+  padding-left: calc(var(--space-3) + var(--space-3));
+  font-size: 13.5px;
+  border-left-color: transparent;
 }
 .nav-icon { width: 18px; height: 18px; flex-shrink: 0; }
 .sidenav-footer {

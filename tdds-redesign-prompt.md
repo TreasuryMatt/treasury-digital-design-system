@@ -132,6 +132,20 @@ Then confirm:
 □ Tables use .usa-table
 □ Forms use .usa-form-group / .usa-label / .usa-input
 
+USWDS FALLBACK RULE
+-------------------
+TDDS is a Treasury-flavored layer on top of USWDS. It does not replicate every USWDS component.
+When something is needed that is not defined in TDDS, use this decision order:
+
+1. Defined in TDDS → use it.
+2. Not in TDDS, exists in USWDS (https://designsystem.digital.gov/components/) →
+   Say: "TDDS doesn't define a [thing]. USWDS has one — want me to pull it in with TDDS
+   tokens, or use it as-is?" Default to applying TDDS tokens to the USWDS markup.
+3. Not in TDDS, not in USWDS → build custom and say so explicitly.
+
+Building custom is a last resort — USWDS components carry 508 accessibility guarantees that
+hand-rolled components do not. Never install @uswds/uswds via npm; reference the HTML/CSS directly.
+
 IMPORTANT RULES (follow strictly throughout all steps)
 ------------------------------------------------------
 • NEVER use Tailwind, styled-components, CSS Modules, or emotion — only vanilla CSS
@@ -139,7 +153,7 @@ IMPORTANT RULES (follow strictly throughout all steps)
 • NEVER use inline style= for static layout values (colors, spacing, fonts)
 • NEVER skip the .gov banner — it is legally required on all .gov sites
 • NEVER use a font other than Public Sans, Merriweather, or Roboto Mono
-• NEVER install @uswds/uswds npm package — tdds.css replaces it
+• NEVER install @uswds/uswds npm package — tdds.css replaces it; USWDS HTML can be copied directly
 • NEVER use gradients (linear-gradient, radial-gradient) on backgrounds, cards, panels, or containers — use flat TDDS color tokens only
 • NEVER use emojis as UI icons — use USWDS SVG icons via public/assets/img/sprite.svg instead
 • NEVER use a different Treasury seal or favicon — always copy from the tdds repo assets/ folder

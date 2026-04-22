@@ -88,3 +88,11 @@ curl -L "https://cdn.jsdelivr.net/npm/@uswds/uswds/packages/uswds-core/src/img/s
 See the full icon list at https://designsystem.digital.gov/components/icon/. Never use emojis as icons.
 
 **No gradients** — Do not use `linear-gradient` or `radial-gradient` on any background, card, panel, or UI element. Use flat TDDS color tokens only.
+
+---
+
+## File sync rule
+
+The **AI agent workflow** section of `CLAUDE.md` (the 6-question intake script) mirrors this file. They must stay identical.
+
+**Rule:** Any time either file is edited — intake questions, answer options, parenthetical notes, or level descriptions — immediately apply the same change to the other file. Never let them drift.
