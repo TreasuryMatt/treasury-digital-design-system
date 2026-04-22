@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+> **STOP — FILE SYNC RULE:** `CLAUDE.md` and `AGENTS.md` must always be identical in their intake script, level descriptions, and implementation references. Any time you edit one, immediately edit the other before doing anything else. No exceptions.
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## What this repo is
@@ -11,6 +13,7 @@ Treasury Digital Design System (TDDS) — a three-file toolkit for building U.S.
 - `tdds.css` — Drop-in CSS foundation (~1175 lines)
 - `tdds-redesign-prompt.md` — 7-step migration template for existing apps
 - `component-library/index.html` — Living single-page visual reference with copy snippets
+- `implementation-examples.md` — What each implementation level means in practice: what changes, what doesn't, time estimates, gotchas, and done criteria
 
 ## Working in this repo
 
@@ -110,15 +113,9 @@ Free response. If none, say "none."
 
 *(Helps determine whether to work page-by-page or propose a global approach first.)*
 
-Once all six questions are answered, summarize the engineer's choices and confirm before making any changes. Then use `TDDS.md`, `tdds.css`, and `tdds-redesign-prompt.md` to guide implementation.
+Once all six questions are answered, summarize the engineer's choices and confirm before making any changes. Then use `TDDS.md`, `tdds.css`, and `tdds-redesign-prompt.md` to guide implementation. Consult `implementation-examples.md` to confirm what the chosen level requires — what changes, what's off-limits, and what the done criteria are.
 
 For **Level 3**, follow the 7-step process in `tdds-redesign-prompt.md` exactly. Key steps: remove existing CSS frameworks, import `tdds.css`, add Google Fonts (Public Sans, Merriweather, Roboto Mono), copy branding assets, build the app shell with GovBanner + SiteHeader + Sidebar.
-
-## File sync rule
-
-`AGENTS.md` and the **AI agent workflow** section of this file (`CLAUDE.md`) contain the same 6-question intake script. They must stay identical.
-
-**Rule:** Any time either file is edited — intake questions, answer options, parenthetical notes, or level descriptions — immediately apply the same change to the other file. Never let them drift.
 
 ## Reference apps (screenshots in `screenshots/`)
 

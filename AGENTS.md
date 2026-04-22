@@ -1,5 +1,7 @@
 # Treasury Digital Design System — Agent Instructions
 
+> **STOP — FILE SYNC RULE:** `AGENTS.md` and `CLAUDE.md` must always be identical in their intake script, level descriptions, and implementation references. Any time you edit one, immediately edit the other before doing anything else. No exceptions.
+
 Before making any changes to the application, ask the engineer:
 
 ---
@@ -67,6 +69,9 @@ Once all six questions are answered, summarize the engineer's choices and confir
 - `TDDS.md` — Design system documentation and usage guidelines
 - `tdds.css` — Core TDDS stylesheet
 - `tdds-redesign-prompt.md` — Detailed redesign instructions and patterns
+- `implementation-examples.md` — What each implementation level means in practice: what changes, what doesn't, time estimates, gotchas, and done criteria
+
+Consult `implementation-examples.md` to confirm what the chosen level requires — what changes, what's off-limits, and what the done criteria are.
 
 ---
 
@@ -91,8 +96,3 @@ See the full icon list at https://designsystem.digital.gov/components/icon/. Nev
 
 ---
 
-## File sync rule
-
-The **AI agent workflow** section of `CLAUDE.md` (the 6-question intake script) mirrors this file. They must stay identical.
-
-**Rule:** Any time either file is edited — intake questions, answer options, parenthetical notes, or level descriptions — immediately apply the same change to the other file. Never let them drift.

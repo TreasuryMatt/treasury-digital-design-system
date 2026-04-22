@@ -123,6 +123,7 @@ STEP 6 — Accessibility Pass
 
 STEP 7 — Final Checklist
 Run through the TDDS file checklist (Section 10 of TDDS.md). Fix any remaining items.
+Also verify against the Level 3 done criteria in implementation-examples.md before declaring complete.
 Then confirm:
 □ App builds and runs without errors
 □ Login page looks like TDDS spec
