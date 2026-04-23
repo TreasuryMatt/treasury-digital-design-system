@@ -174,6 +174,38 @@ Never use arbitrary pixel values like `margin: 10px` or `padding: 18px`. Always 
 --shadow-3:      0 8px 24px 0 rgba(0,0,0,.14)  /* modals, login card */
 ```
 
+### Dark Mode
+
+TDDS supports dark mode through **token remapping**, not separate component variants. Apply `data-theme="dark"` to the `<html>` element and let the design tokens propagate through the UI.
+
+```css
+[data-theme="dark"] {
+  --usa-white:              #141414;
+  --usa-base-lightest:      #080808;
+  --usa-base-lighter:       rgba(255,255,255,.07);
+  --usa-base-light:         #363d45;
+  --usa-base:               #626d78;
+  --usa-base-dark:          #97a3ae;
+  --usa-base-darker:        #bec6ce;
+  --usa-base-darkest:       #e2e6ea;
+  --usa-ink:                #e2e6ea;
+  --gov-banner-bg:          #030303;
+  --gov-banner-text:        #8f9ba5;
+  --usa-primary-lighter:    rgba(80,154,224,.16);
+  --usa-primary-light:      #6aaee8;
+  --usa-primary:            #509ad4;
+  --usa-primary-vivid:      #5aaef0;
+  --usa-primary-dark:       #8bc2f5;
+}
+```
+
+**Dark mode rules:**
+- Keep `--usa-primary-darker` unchanged. It remains the fixed Treasury chrome color for header and other dark-blue surfaces.
+- Prefer token remapping over component-specific dark CSS. Only add component overrides when a component uses a fixed dark token as foreground text.
+- Use the approved `.usa-theme-toggle` pattern from `tdds.css` / `component-library/index.html` when the product needs a theme switcher.
+- Persist theme preference in `localStorage` and respect `prefers-color-scheme` on first load if the app offers user-selectable themes.
+- Treat `component-library/index.html` as the canonical visual reference for dark mode.
+
 ---
 
 ## 3. Required Page Shell

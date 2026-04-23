@@ -38,6 +38,7 @@ Complete each step fully before moving to the next. After each step, confirm wha
 STEP 1 — Foundation
 • Remove any existing CSS framework (Tailwind, Bootstrap, etc.) from package.json and all imports.
 • Copy tdds.css into src/ and import it as the first import in src/main.tsx (or index.tsx).
+• Preserve the built-in TDDS dark mode support in tdds.css. Do not rewrite it with app-specific token names or duplicate per-component dark styles unless the app has a documented exception.
 • Add Google Fonts to index.html <head>:
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,6 +78,7 @@ STEP 2 — App Shell
   + app name in sans 800 weight, user info + logout on right.
 • Create Sidebar component: .usa-sidenav-container (240px, white, border-right), nav links 
   using .usa-sidenav a with active left-border pattern.
+• If the product should support theme switching, place the TDDS `.usa-theme-toggle` button in the header or toolbar and toggle `data-theme="dark"` on `<html>`.
 • Confirm: shell renders correctly with banner, header, sidebar, and outlet area.
 
 STEP 3 — Login Page
@@ -162,6 +164,7 @@ IMPORTANT RULES (follow strictly throughout all steps)
 • ALWAYS include focus styles on interactive elements
 • ALWAYS use public/treasury-seal-white-simple.svg for the header logo
 • ALWAYS use public/favicon.svg as the browser tab icon
+• ALWAYS treat the TDDS component library as the approved visual reference, including dark mode
 ```
 
 ---

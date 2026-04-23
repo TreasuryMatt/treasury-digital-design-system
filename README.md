@@ -46,10 +46,13 @@ The authoritative spec for all Treasury apps. Paste this as a system prompt or c
 - A pre-ship checklist
 
 ### `tdds.css` — Drop-in CSS foundation
-One file that gives a new app the full TDDS design system. Import it once and all token variables and component classes are available. Derived directly from the production CSS shared across Treasury applications. Covers the complete token set, reset, layout shell, every component class, the login page, and utility helpers.
+One file that gives a new app the full TDDS design system. Import it once and all token variables and component classes are available. Derived directly from the production CSS shared across Treasury applications. Covers the complete token set, reset, layout shell, every component class, the login page, utility helpers, and the approved token-based dark mode implementation.
 
 ### `tdds-redesign-prompt.md` — Codex redesign prompt template
 A fill-in-the-blank prompt engineers give to an AI assistant to migrate an existing app to TDDS. Structured as 7 sequential steps — foundation, shell, login, pages, color purge, accessibility, final checklist — with tips for getting consistent results across a multi-page app.
+
+### `component-library/index.html` — Approved visual reference
+The living reference for what TDDS should look like. This includes the approved dark mode behavior. If the docs and stylesheet ever drift, treat the component library as the visual source of truth and sync the other files to match it.
 
 ---
 

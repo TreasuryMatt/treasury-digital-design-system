@@ -95,6 +95,43 @@ html, body, #root { height: 100%; }
   --shadow-3:      0 8px 24px 0 rgba(0,0,0,.14);
 }
 
+/* ── Dark Mode Token Overrides ──────────────────────────────────────────── */
+[data-theme="dark"] {
+  /* Neutrals */
+  --usa-white:              #141414;
+  --usa-base-lightest:      #080808;
+  --usa-base-lighter:       rgba(255,255,255,.07);
+  --usa-base-light:         #363d45;
+  --usa-base:               #626d78;
+  --usa-base-dark:          #97a3ae;
+  --usa-base-darker:        #bec6ce;
+  --usa-base-darkest:       #e2e6ea;
+  --usa-ink:                #e2e6ea;
+
+  /* Gov banner */
+  --gov-banner-bg:          #030303;
+  --gov-banner-text:        #8f9ba5;
+
+  /* Primary */
+  --usa-primary-lighter:    rgba(80,154,224,.16);
+  --usa-primary-light:      #6aaee8;
+  --usa-primary:            #509ad4;
+  --usa-primary-vivid:      #5aaef0;
+  --usa-primary-dark:       #8bc2f5;
+  /* --usa-primary-darker intentionally stays #162e51 for chrome */
+
+  /* Status / accent surfaces */
+  --usa-success-lighter:     rgba(0,169,28,.18);
+  --usa-warning-lighter:     rgba(255,190,46,.14);
+  --usa-error-lighter:       rgba(213,67,9,.18);
+  --usa-accent-cool-lighter: rgba(0,189,227,.14);
+
+  /* Shadows */
+  --shadow-1: 0 1px 4px 0 rgba(0,0,0,.45);
+  --shadow-2: 0 4px 12px 0 rgba(0,0,0,.55);
+  --shadow-3: 0 8px 24px 0 rgba(0,0,0,.65);
+}
+
 /* ── Base ────────────────────────────────────────────────────────────────── */
 body {
   font-family: var(--font-sans);
@@ -832,6 +869,33 @@ code {
 .usa-button--sm { padding: 6px 14px; font-size: 13px; }
 .usa-button--unstyled { background: none; border: none; color: var(--usa-primary); text-decoration: underline; padding: 0; font-size: inherit; font-weight: 400; }
 
+/* ── Theme Toggle ───────────────────────────────────────────────────────── */
+.usa-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--usa-base-darker);
+  background: var(--usa-base-lightest);
+  border: 1px solid var(--usa-base-lighter);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s;
+}
+.usa-theme-toggle:hover {
+  background: var(--usa-primary-lighter);
+  border-color: var(--usa-primary-light);
+  color: var(--usa-primary-dark);
+}
+.usa-theme-toggle__icon { flex-shrink: 0; }
+.usa-theme-toggle__icon--sun  { display: none; }
+.usa-theme-toggle__icon--moon { display: block; }
+[data-theme="dark"] .usa-theme-toggle__icon--sun  { display: block; }
+[data-theme="dark"] .usa-theme-toggle__icon--moon { display: none; }
+
 /* ── Forms ───────────────────────────────────────────────────────────────── */
 .usa-form-group { margin-bottom: var(--space-3); }
 .usa-label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--usa-ink); }
@@ -1196,6 +1260,33 @@ code {
 .trend-arrow--improving { color: var(--usa-success-dark); }
 .trend-arrow--stable    { color: var(--usa-base); }
 .trend-arrow--degrading { color: var(--usa-error); }
+
+/* ── Dark Mode Component Adjustments ────────────────────────────────────── */
+[data-theme="dark"] .stat-value                { color: var(--usa-primary-light); }
+[data-theme="dark"] .stat-value.warn           { color: var(--usa-warning); }
+[data-theme="dark"] .stat-value.danger         { color: var(--usa-error); }
+[data-theme="dark"] .stat-value.success        { color: var(--usa-success); }
+[data-theme="dark"] .usa-page-title            { color: var(--usa-primary-light); }
+[data-theme="dark"] .section-title             { color: var(--usa-primary-light); }
+[data-theme="dark"] .software-card__name       { color: var(--usa-primary-light); }
+[data-theme="dark"] .usa-table th              { color: var(--usa-base-darker); }
+[data-theme="dark"] .usa-modal__heading        { color: var(--usa-base-darkest); }
+[data-theme="dark"] .usa-modal__close          { color: rgba(230,233,236,.7); }
+[data-theme="dark"] .usa-modal__close:hover    { color: var(--usa-base-darkest); }
+[data-theme="dark"] .toast                     { color: #ffffff; }
+[data-theme="dark"] .toast--info               { background: var(--usa-primary); }
+[data-theme="dark"] .usa-tag--green            { color: #5dbb6a; }
+[data-theme="dark"] .usa-tag--orange           { color: #f0a060; }
+[data-theme="dark"] .usa-tag--yellow           { color: var(--usa-warning); }
+[data-theme="dark"] .usa-tag--cyan             { color: var(--usa-accent-cool); }
+[data-theme="dark"] .badge--contractor         { color: #f0a060; }
+[data-theme="dark"] .badge--available          { color: var(--usa-success); }
+[data-theme="dark"] .status-badge--in_progress { color: var(--usa-accent-cool); }
+[data-theme="dark"] .status-badge--on_hold     { color: var(--usa-warning); }
+[data-theme="dark"] .status-badge--completed   { color: var(--usa-success); }
+[data-theme="dark"] .usa-alert--success        { color: var(--usa-success); }
+[data-theme="dark"] .usa-alert--warning        { color: var(--usa-warning); }
+[data-theme="dark"] .usa-alert--error          { color: var(--usa-error); }
 
 /* ── Utilities ───────────────────────────────────────────────────────────── */
 .flex         { display: flex; }

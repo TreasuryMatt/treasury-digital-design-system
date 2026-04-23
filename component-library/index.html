@@ -507,27 +507,27 @@
        redefined here; every component that reads them auto-adapts.
        ════════════════════════════════════════════════════════════════════════ */
     [data-theme="dark"] {
-      /* Neutrals — inverted scale */
-      --usa-white:              #0f2035;
-      --usa-base-lightest:      #09182a;
-      --usa-base-lighter:       rgba(255,255,255,.11);
-      --usa-base-light:         #516e89;
-      --usa-base:               #7fa0bc;
-      --usa-base-dark:          #a8c4d8;
-      --usa-base-darker:        #c8dce9;
-      --usa-base-darkest:       #e5eff6;
-      --usa-ink:                #e5eff6;
+      /* Neutrals — true black/near-black scale (outside USWDS palette) */
+      --usa-white:              #141414;   /* card / elevated surface */
+      --usa-base-lightest:      #080808;   /* page background — near-true black */
+      --usa-base-lighter:       rgba(255,255,255,.07);
+      --usa-base-light:         #363d45;
+      --usa-base:               #626d78;
+      --usa-base-dark:          #97a3ae;
+      --usa-base-darker:        #bec6ce;
+      --usa-base-darkest:       #e2e6ea;
+      --usa-ink:                #e2e6ea;
 
-      /* Gov banner */
-      --gov-banner-bg:          #07111e;
-      --gov-banner-text:        #a8c4d8;
+      /* Gov banner — true black strip */
+      --gov-banner-bg:          #030303;
+      --gov-banner-text:        #8f9ba5;
 
-      /* Primary — shift lighter for dark-bg legibility */
-      --usa-primary-lighter:    rgba(115,179,231,.16);
-      --usa-primary-light:      #73b3e7;
-      --usa-primary:            #73b3e7;
-      --usa-primary-vivid:      #5ba4e5;
-      --usa-primary-dark:       #96caf5;
+      /* Primary — blue retained as accent only, not as surface */
+      --usa-primary-lighter:    rgba(80,154,224,.16);
+      --usa-primary-light:      #6aaee8;
+      --usa-primary:            #509ad4;
+      --usa-primary-vivid:      #5aaef0;
+      --usa-primary-dark:       #8bc2f5;
       /* --usa-primary-darker stays #162e51 — used for header/footer chrome */
 
       /* Status — muted translucent backgrounds */
@@ -537,9 +537,9 @@
       --usa-accent-cool-lighter: rgba(0,189,227,.14);
 
       /* Shadows — heavier on dark backgrounds */
-      --shadow-1: 0 1px 4px 0 rgba(0,0,0,.35);
-      --shadow-2: 0 4px 12px 0 rgba(0,0,0,.45);
-      --shadow-3: 0 8px 24px 0 rgba(0,0,0,.55);
+      --shadow-1: 0 1px 4px 0 rgba(0,0,0,.45);
+      --shadow-2: 0 4px 12px 0 rgba(0,0,0,.55);
+      --shadow-3: 0 8px 24px 0 rgba(0,0,0,.65);
     }
 
     /* ── Library-specific dark mode overrides ────────────────────────────── */
@@ -559,6 +559,7 @@
     [data-theme="dark"] .lib-theme-toggle { color: var(--usa-base-dark); }
 
     /* Section/subsection titles use --usa-primary-darker (hardcoded navy) */
+    [data-theme="dark"] .lib-hero           { background: var(--usa-base-lightest); border-bottom-color: var(--usa-base-light); }
     [data-theme="dark"] .lib-hero__title      { color: var(--usa-primary-light); }
     [data-theme="dark"] .lib-hero__agency     { color: var(--usa-primary-light); }
     [data-theme="dark"] .lib-section__title   { color: var(--usa-primary-light); }
@@ -576,8 +577,8 @@
 
     /* Code blocks: slightly elevate above the dark page */
     [data-theme="dark"] .lib-code pre {
-      background: #1a3655;
-      color: #c8dce9;
+      background: #1e2224;
+      color: #c6cdd5;
     }
 
     /* Token table row dividers */
@@ -590,15 +591,15 @@
     [data-theme="dark"] .usa-table th { color: var(--usa-base-darker); }
 
     /* Modal header */
-    [data-theme="dark"] .usa-modal__heading           { color: #e5eff6; }
-    [data-theme="dark"] .usa-modal__close             { color: rgba(229,239,246,.75); }
-    [data-theme="dark"] .usa-modal__close:hover       { color: #e5eff6; }
+    [data-theme="dark"] .usa-modal__heading           { color: var(--usa-base-darkest); }
+    [data-theme="dark"] .usa-modal__close             { color: rgba(230,233,236,.7); }
+    [data-theme="dark"] .usa-modal__close:hover       { color: var(--usa-base-darkest); }
 
     /* Lib footer */
     [data-theme="dark"] .lib-footer         { color: var(--usa-primary-light); }
-    [data-theme="dark"] .lib-footer strong  { color: #e5eff6; }
+    [data-theme="dark"] .lib-footer strong  { color: var(--usa-base-darkest); }
     [data-theme="dark"] .lib-footer a       { color: var(--usa-primary-light); }
-    [data-theme="dark"] .lib-footer a:hover { color: #e5eff6; }
+    [data-theme="dark"] .lib-footer a:hover { color: var(--usa-base-darkest); }
     /* inline code in footer has hardcoded color via style attr — override with !important */
     [data-theme="dark"] .lib-footer code    { color: var(--usa-primary-light) !important; }
 
@@ -614,6 +615,31 @@
 
     /* ── Dark mode: copy button — --usa-primary-lighter is now near-transparent */
     [data-theme="dark"] .lib-copy-btn { color: var(--usa-base-dark); }
+
+    /* ── Dark mode: toasts — color: var(--usa-white) becomes near-black; force white.
+       Info toast background (#162e51) is nearly invisible on near-black — use accent blue. */
+    [data-theme="dark"] .toast        { color: #ffffff; }
+    [data-theme="dark"] .toast--info  { background: var(--usa-primary); }
+
+    /* ── Dark mode: tags — hardcoded dark text colors need light equivalents */
+    [data-theme="dark"] .usa-tag--green  { color: #5dbb6a; }
+    [data-theme="dark"] .usa-tag--orange { color: #f0a060; }
+    [data-theme="dark"] .usa-tag--yellow { color: var(--usa-warning); }
+    [data-theme="dark"] .usa-tag--cyan   { color: var(--usa-accent-cool); }
+
+    /* ── Dark mode: badges — hardcoded dark text colors */
+    [data-theme="dark"] .badge--contractor { color: #f0a060; }
+    [data-theme="dark"] .badge--available  { color: var(--usa-success); }
+
+    /* ── Dark mode: status badges — hardcoded dark text colors */
+    [data-theme="dark"] .status-badge--in_progress { color: var(--usa-accent-cool); }
+    [data-theme="dark"] .status-badge--on_hold     { color: var(--usa-warning); }
+    [data-theme="dark"] .status-badge--completed   { color: var(--usa-success); }
+
+    /* ── Dark mode: alerts — hardcoded dark text colors */
+    [data-theme="dark"] .usa-alert--success { color: var(--usa-success); }
+    [data-theme="dark"] .usa-alert--warning { color: var(--usa-warning); }
+    [data-theme="dark"] .usa-alert--error   { color: var(--usa-error); }
   </style>
 </head>
 <body>
@@ -2328,20 +2354,20 @@ function toggleTheme() {
           <table class="token-table" style="width:100%">
             <thead><tr><th>Token</th><th>Light value</th><th>Dark override</th></tr></thead>
             <tbody>
-              <tr><td><code>--usa-white</code></td><td>#ffffff</td><td>#0f2035</td></tr>
-              <tr><td><code>--usa-base-lightest</code></td><td>#f0f0f0</td><td>#09182a</td></tr>
-              <tr><td><code>--usa-base-lighter</code></td><td>#dfe1e2</td><td>rgba(255,255,255,.11)</td></tr>
-              <tr><td><code>--usa-base-light</code></td><td>#a9aeb1</td><td>#516e89</td></tr>
-              <tr><td><code>--usa-base</code></td><td>#71767a</td><td>#7fa0bc</td></tr>
-              <tr><td><code>--usa-base-dark</code></td><td>#565c65</td><td>#a8c4d8</td></tr>
-              <tr><td><code>--usa-base-darker</code></td><td>#3d4551</td><td>#c8dce9</td></tr>
-              <tr><td><code>--usa-base-darkest</code></td><td>#1b1b1b</td><td>#e5eff6</td></tr>
-              <tr><td><code>--usa-ink</code></td><td>#1b1b1b</td><td>#e5eff6</td></tr>
-              <tr><td><code>--usa-primary</code></td><td>#005ea2</td><td>#73b3e7</td></tr>
-              <tr><td><code>--usa-primary-light</code></td><td>#73b3e7</td><td>#73b3e7</td></tr>
-              <tr><td><code>--usa-primary-dark</code></td><td>#1a4480</td><td>#96caf5</td></tr>
+              <tr><td><code>--usa-white</code></td><td>#ffffff</td><td>#242424</td></tr>
+              <tr><td><code>--usa-base-lightest</code></td><td>#f0f0f0</td><td>#161616</td></tr>
+              <tr><td><code>--usa-base-lighter</code></td><td>#dfe1e2</td><td>rgba(255,255,255,.09)</td></tr>
+              <tr><td><code>--usa-base-light</code></td><td>#a9aeb1</td><td>#505862</td></tr>
+              <tr><td><code>--usa-base</code></td><td>#71767a</td><td>#7a8694</td></tr>
+              <tr><td><code>--usa-base-dark</code></td><td>#565c65</td><td>#a2adb8</td></tr>
+              <tr><td><code>--usa-base-darker</code></td><td>#3d4551</td><td>#c6cdd5</td></tr>
+              <tr><td><code>--usa-base-darkest</code></td><td>#1b1b1b</td><td>#e6e9ec</td></tr>
+              <tr><td><code>--usa-ink</code></td><td>#1b1b1b</td><td>#e6e9ec</td></tr>
+              <tr><td><code>--usa-primary</code></td><td>#005ea2</td><td>#509ad4</td></tr>
+              <tr><td><code>--usa-primary-light</code></td><td>#73b3e7</td><td>#6aaee8</td></tr>
+              <tr><td><code>--usa-primary-dark</code></td><td>#1a4480</td><td>#8bc2f5</td></tr>
               <tr><td><code>--usa-primary-darker</code></td><td>#162e51</td><td><em>unchanged — header/footer chrome</em></td></tr>
-              <tr><td><code>--usa-primary-lighter</code></td><td>#d9e8f6</td><td>rgba(115,179,231,.16)</td></tr>
+              <tr><td><code>--usa-primary-lighter</code></td><td>#d9e8f6</td><td>rgba(80,154,224,.16)</td></tr>
             </tbody>
           </table>
         </div>
