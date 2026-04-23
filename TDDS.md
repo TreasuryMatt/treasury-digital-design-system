@@ -464,6 +464,48 @@ For RAG (Red/Amber/Green) project status, use `RagBadge` component with `status`
 
 Modal header always uses `background: var(--usa-primary-darker)` with white text.
 
+### Toast
+
+Floating transient notification, fixed to the bottom-center of the viewport. Auto-dismisses after 4 seconds; always include a manual dismiss button for accessibility.
+
+```html
+<div class="toast toast--success" role="status" aria-live="polite">
+  <span>Changes saved successfully.</span>
+  <button class="toast__dismiss" aria-label="Dismiss">×</button>
+</div>
+```
+
+**Variants:** `toast--success` (green), `toast--error` (red), `toast--info` (navy).
+
+**Vanilla JS pattern:**
+
+```js
+let _toastTimer = null;
+function showToast(message, type = 'success') {
+  let el = document.getElementById('tdds-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'tdds-toast';
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    document.body.appendChild(el);
+  }
+  el.className = `toast toast--${type}`;
+  el.innerHTML = `<span>${message}</span><button class="toast__dismiss" aria-label="Dismiss" onclick="dismissToast()">×</button>`;
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(dismissToast, 4000);
+}
+function dismissToast() {
+  const el = document.getElementById('tdds-toast');
+  if (el) el.remove();
+  clearTimeout(_toastTimer);
+}
+```
+
+- Use `role="status"` + `aria-live="polite"` so screen readers announce the message without interrupting the user.
+- Never stack multiple toasts — each call replaces the current one.
+- Do not use toast for errors that require user action; use `.usa-alert--error` inline instead.
+
 ### Forms
 
 ```html

@@ -1825,6 +1825,48 @@ font-family: var(--font-mono);    /* Roboto Mono */</code></pre>
           <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
         </div>
       </div>
+      <div class="lib-subsection">
+        <h3 class="lib-subsection__title">Toast — <code>.toast</code></h3>
+        <p class="lib-subsection__desc">Fixed bottom-center notification. Auto-dismisses after 4 s. Use <code>role="status"</code> + <code>aria-live="polite"</code> so screen readers announce it without interrupting. Never stack toasts — each call replaces the current one. Use an inline <code>.usa-alert</code> instead for errors requiring user action.</p>
+        <div class="lib-demo" style="min-height:80px;align-items:center;gap:var(--space-2);flex-wrap:wrap">
+          <button class="usa-button usa-button--primary" onclick="demoToast('Changes saved successfully.','success')">Success toast</button>
+          <button class="usa-button usa-button--secondary" onclick="demoToast('Unable to save changes. Try again.','error')">Error toast</button>
+          <button class="usa-button usa-button--outline" onclick="demoToast('Your session will expire in 5 minutes.','info')">Info toast</button>
+        </div>
+        <div class="lib-code">
+          <pre><code>&lt;!-- HTML (rendered by JS) --&gt;
+&lt;div class="toast toast--success" role="status" aria-live="polite"&gt;
+  &lt;span&gt;Changes saved successfully.&lt;/span&gt;
+  &lt;button class="toast__dismiss" aria-label="Dismiss"&gt;&amp;times;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Vanilla JS helper — add once per app --&gt;
+&lt;script&gt;
+let _toastTimer = null;
+function showToast(message, type = 'success') {
+  let el = document.getElementById('tdds-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'tdds-toast';
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    document.body.appendChild(el);
+  }
+  el.className = `toast toast--${type}`;
+  el.innerHTML = `&lt;span&gt;${message}&lt;/span&gt;` +
+    `&lt;button class="toast__dismiss" aria-label="Dismiss" onclick="dismissToast()"&gt;&amp;times;&lt;/button&gt;`;
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(dismissToast, 4000);
+}
+function dismissToast() {
+  const el = document.getElementById('tdds-toast');
+  if (el) el.remove();
+  clearTimeout(_toastTimer);
+}
+&lt;/script&gt;</code></pre>
+          <button class="lib-copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
     </section>
 
 
@@ -2367,6 +2409,28 @@ function toggleTheme() {
         sel.removeAllRanges();
         sel.addRange(range);
       });
+    }
+
+    /* Toast demo */
+    let _toastTimer = null;
+    function demoToast(message, type) {
+      let el = document.getElementById('tdds-toast');
+      if (!el) {
+        el = document.createElement('div');
+        el.id = 'tdds-toast';
+        el.setAttribute('role', 'status');
+        el.setAttribute('aria-live', 'polite');
+        document.body.appendChild(el);
+      }
+      el.className = `toast toast--${type}`;
+      el.innerHTML = `<span>${message}</span><button class="toast__dismiss" aria-label="Dismiss" onclick="dismissToast()">×</button>`;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(dismissToast, 4000);
+    }
+    function dismissToast() {
+      const el = document.getElementById('tdds-toast');
+      if (el) el.remove();
+      clearTimeout(_toastTimer);
     }
 
     /* Highlight active sidebar link on scroll */
